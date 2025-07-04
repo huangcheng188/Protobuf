@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package message;
+
+import "MessageType.proto";
+import "ControlCommand.proto";
+import "AudioData.proto";
+import "TranslationMaster.proto";
+import "TouchDate.proto";
+
+message Message {
+  uint32 version = 1;  // 协议版本号
+  MessageType msg_type = 2; //消息类型
+  
+oneof Data {
+    AudioData audio = 3;
+    // ImageData image = 3;
+    ControlCommand command = 4;
+    // CommandResponse response = 5;
+    // DeviceStatus status = 6;
+    TranslationMaster translate = 8;
+    TP_Command touch = 9;
+  }
+}

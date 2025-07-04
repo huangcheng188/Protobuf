@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+//翻译模式
+enum TranslationModeType {
+    SIMULTANEOUS = 0;        //同传翻译
+    DIALOGUE = 1;           //对话翻译
+}
+
+//眼镜字幕
+enum GlassesCaptions {
+    ALL_DISPLAY = 0;                //显示原文和译文
+    ONLY_TRANSLATION = 1;        //只显示译文
+}
+
+//翻译自己说的话
+enum TranslateSelfSound {
+    NOT = 0;
+    YES = 1;
+}
+
+//翻译设置消息
+message TranslationSetting {
+    TranslationModeType mode_type = 1;//翻译模式
+    bytes source_language = 2;//源语言
+    bytes target_language = 3;//目标语言
+    GlassesCaptions glassesCaptions = 4;//眼镜字幕展示方式
+    TranslateSelfSound translate_self_sound = 5;//是否翻译自己说的话
+}
+
+//翻译内容来源
+enum TranslationRole {
+    PHONE = 0;       //手机端
+    GLASSES = 1;     //眼镜端
+}
+
+//翻译文本内容
+message TranslationTextContent {
+    bytes original_text = 1;
+    bytes translation_text = 2;
+    TranslationRole role = 3;
+}
+
+//消息主体类型
+enum TranslationMessageType {
+    TRANSLATION_SETTING = 0;        //设置数据同步
+    TRANSLATION_TEXT_CONTENT = 1;  //翻译文本内容传输
+}
+
+//消息主体
+message TranslationMaster {
+    TranslationMessageType msg_type = 1;
+    oneof Command
+    {
+        TranslationSetting setting = 2;
+        TranslationTextContent text_content = 3;
+    }
+}

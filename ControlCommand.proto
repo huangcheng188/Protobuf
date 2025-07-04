@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+//触摸板有长按，点击，拖动事件
+enum CommandType {
+  VOLUME_CTRL     = 0;      // 音量控制
+  BRIGHTNESS_CTRL = 1;      // 亮度控制
+  GET_SN          = 2;      // 获取sn
+  CHANGE_MODE     = 3;      // 切换模式
+  BACK_INDEX      = 4;      // 返回键
+  HOME_INDEX      = 5;      // 主页键
+  MUNU_INDEX      = 6;      // 菜单键
+  GO_INDEX        = 7;      // Go键
+  TOUCH_MODE      = 8;      // 触摸模式
+  IS_OPEN_MIC     = 9;      // 麦克风功能
+  IS_OPEN_SPK     = 10;     // 喇叭功能
+  IS_OPEN_VOICE   = 11;     // 录音功能
+  IS_OPEN_BT      = 12;     // 经典蓝牙功能
+  IS_OPEN_BLE     = 13;     // 低功耗蓝牙功能
+  IS_OPEN_TP      = 14;     // 触摸屏功能
+  IS_OPEN_WEAR    = 15;     // 佩戴检测功能
+}
+
+enum CommandMode {
+  ORD_MODE =   0;           // 普通模式
+  RAY_MODE =   1;           // 射线模式
+  MOUSE_MODE = 2;           // 鼠标模式
+}
+
+enum CommanTouchWay {
+  LongPass =   0;           // 长按模式
+  Click    =   1;           // 点击模式
+  Drag     =   2;           // 拖动模式
+}
+
+message CommandVolume {
+  uint32 volume = 1;
+}
+
+message CommandBrightness {
+  uint32 brightness = 1;
+}
+
+message CommandGetSn {
+  uint32 getsn = 1;
+}
+
+message CommandChangeMode {
+  CommandMode mode = 1;
+}
+
+message CommandTouchMode {
+  CommandMode mode = 1;
+}
+
+message ControlCommand {
+  CommandType type = 1;
+  uint32 type_status = 2;
+  bool is_no_open = 3;
+  oneof Command                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  {
+      CommandVolume volume_set = 4;
+      CommandBrightness brightness = 5;
+      CommandGetSn getsn = 6;
+      CommandChangeMode mode_set = 7;
+      CommanTouchWay touch_set = 8;
+      bool is_open_voice = 9;      //是否开启录音
+  }
+}

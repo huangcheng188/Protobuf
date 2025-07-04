@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+enum MessageType {
+    AUDIO = 0;                  //音频数据
+    IMAGE = 1;                  // 图片数据
+    CONTROL_COMMAND = 2;        // 控制指令
+    BASIS_DATA_SYNC = 3;        // 基本数据同步
+    MESSAGE_REMINDER = 4;       // 消息提醒
+    CALL_CONTROL = 5;           // 来电控制
+    MUSIC_CONTROL = 6;          // 音乐控制
+    INTERACTION_EVENTS = 7;     // 交互事件
+    TRANSLATION_MASTER = 8;     // 翻译大师
+    SPEECH_INSCRIPTION = 9;     // 演讲题词
+    SOUND_RECORD = 10;          // 超能录音
+    AI_ASSISTANT = 11;          // AI助手
+    CONVERSATION_RECORD = 12;   // 轻语速记
+    AR_FACE_RECOGNITION = 13;   // AR识人
+    IMG_MANAGER = 14;           // 图像和相册管理
+    STARTING_APPLICATION = 15;  // 启动应用
+    OTA = 16;                   // OTA
+    OTHER_CONTROL_COMMANDS = 17;// 其他主从控制指令
+}
