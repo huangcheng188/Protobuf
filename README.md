@@ -1,0 +1,2 @@
+# Protobuf
+Protobuf origin *.proto
