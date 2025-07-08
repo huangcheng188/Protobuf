@@ -18,6 +18,7 @@ enum CommandType {
   IS_OPEN_BLE     = 13;     // 低功耗蓝牙功能
   IS_OPEN_TP      = 14;     // 触摸屏功能
   IS_OPEN_WEAR    = 15;     // 佩戴检测功能
+  BREAK_BIND      = 16;     // 控制绑定连接
 }
 
 enum CommandMode {
@@ -52,6 +53,11 @@ message CommandTouchMode {
   CommandMode mode = 1;
 }
 
+enum CommandSetBind {
+  UNBIND          = 0;                 //控制解绑
+  BIND            = 1;                 //控制绑定
+}
+
 message ControlCommand {
   CommandType type = 1;
   uint32 type_status = 2;
@@ -63,6 +69,7 @@ message ControlCommand {
       CommandGetSn getsn = 6;
       CommandChangeMode mode_set = 7;
       CommanTouchWay touch_set = 8;
-      bool is_open_voice = 9;      //是否开启录音
+      bool is_open_voice = 9;              //是否开启录音
+      CommandSetBind set_bind = 10;        //是否解绑蓝牙
   }
 }
