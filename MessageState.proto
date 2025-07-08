@@ -1,5 +1,20 @@
 syntax = "proto3";
 
+//wifi状态同步
+message FileInfo {
+  uint32 file_type = 2;   		//0:图片   1:视频
+  uint64 create_time = 3;       // 文件创建时间（时间戳，单位：秒）
+}
+
+message WifiData {
+  string ssid = 1;              // WiFi名称
+  string pwd = 2;               // WiFi密码
+  uint32 picture_file_count = 3;        // 需要传输的图片文件个数
+  uint32 video_file_count = 4;        // 需要传输的视频文件个数
+  repeated FileInfo files = 5;  // 文件列表
+}
+
+//蓝牙状态同步
 enum StatusBind {
   APP_TO_GLASS_ONLY_BLE_OK = 0;            //app连接眼镜只有ble可以
   APP_TO_GLASS_ONLY_BT_OK = 1;             //app连接眼镜只有bt可以
@@ -20,6 +35,24 @@ message UserData {
 message BLE_BT_Status {
   bool glass_bind  = 1;                //眼镜已绑定
   bool Phone_bind  = 2;                //手机已绑定
-  UserData user_details = 3;           //用户详情
-  StatusBind  statustype = 4;          //绑定状态
+  StatusBind  statustype = 3;          //绑定状态
+}
+
+enum Synchronous {
+  START_SYNCH   = 0;
+  STOP_SYNCH    = 1;
+  RESTART_SYNCH = 2;
+  NOT_PERFORM   = 3;
+}
+
+message MessageStatus{
+  
+  Synchronous  synch = 1;              //同步操作
+
+  UserData user_details = 2;           //用户详情
+  
+  oneof Status {
+    BLE_BT_Status blue_tooch = 3;
+    WifiData      wifi_data  = 4;
+  }
 }

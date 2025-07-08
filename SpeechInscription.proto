@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+// 替换为你的包名
+//option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+//option java_outer_classname = "SpeechInscriptionProto";
+
+//消息主体类型
+enum SpeechInscriptionMessageType {
+    PROMPT_COMMANDS_TYPE = 0;
+    UPLOAD_PROMPT_DOCUMENT_REQ_TYPE = 1;
+    DOCUMENT_UPLOAD_STATE_RESP= 2;
+    START_PROMPT_REQ = 3;
+    PROMPT_SHOW_RESP = 4;
+    UPDATE_PAGE_TURNING_MODE_TYPE = 5;
+    SPEECH_PROGRESS_SYNC = 6;
+    PROMPT_STATE_RESP = 7;
+}
+
+//消息主体
+message SpeechInscription {
+    SpeechInscriptionMessageType msg_type = 1;
+    oneof Command
+    {
+        UpdatePromptDocumentReq uploadPromptDocument = 2;
+        DocumentUploadStateResp documentUploadStateResp = 3;
+        StartPromptReq startPromptReq = 4;
+        PromptShowResp promptShowResp = 5;
+        SpeechProgressSync speechProgressSync = 6;
+        UpdatePageTurningMode updatePageTurningMode = 7;
+        PromptStateResp promptStateResp = 8;
+        PromptCommandType promptCommandType = 9;
+    }
+}
+
+enum PromptCommandType {
+    EXIT_PROMPT = 0;      // 退出提词
+    PREVIOUS_PAGE = 1;    // 上翻页
+    NEXT_PAGE = 2;        // 下翻页
+    REQUEST_PROMPT_STATE = 3;      // app发送该请求眼镜端提词状态；眼镜端返回正在提词的PromptStateResp信息；如果没提词，不用返回
+}
+
+//更新眼镜端提词文档
+message UpdatePromptDocumentReq {
+    uint32 fileId = 1;    //文档id
+    bytes fileName = 2; //文档名称
+    bytes fileContent = 3;    //文档内容
+}
+
+// 眼镜端返回文档接收状态
+message DocumentUploadStateResp  {
+     uint32 uploadStateResp = 1;  // 0:上传失败；1:上传成功
+}
+
+//开启提词
+message StartPromptReq {
+  uint32 promptDocumentId = 1; //提词id
+}
+
+//眼镜端返回提词进度（发送开始提词命令后返回）
+message PromptShowResp {
+    uint32 font_size = 1; //字体大小 ？？？为什么传这个
+    uint32 row_num = 2;  //一行字数
+    SpeechProgressSync speechProgressSync = 3;  //进度
+}
+
+//提词进度调节（双端使用）
+message SpeechProgressSync {
+    uint32 line = 1;      //更新提词进度 展示到第几行
+    float  progress = 2;  //进度
+}
+
+//更新翻页模式
+message UpdatePageTurningMode {
+    uint32 isTurnPageAuto = 1; //0:关闭自动翻页；1:开启自动翻页
+}
+
+message PromptStateResp {
+   uint32 fileId = 1;    //文档id
+   bytes fileName = 2; //文档名称
+   bytes fileContentMd5 = 3;    //文档内容md5
+   PromptShowResp promptShowResp = 4;
+}

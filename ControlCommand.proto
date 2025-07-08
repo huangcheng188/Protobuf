@@ -53,6 +53,11 @@ message CommandTouchMode {
   CommandMode mode = 1;
 }
 
+message CommandSetVoice {
+  bool is_open_voice       = 1;
+  uint32 recording_scene   = 2;    //0录像1录音2速记3提词4语音5字幕6翻译7AI8蓝牙通话9蓝牙A2DP10语音唤醒/命令词眼镜11本地音效
+}
+
 enum CommandSetBind {
   UNBIND          = 0;                 //控制解绑
   BIND            = 1;                 //控制绑定
@@ -69,7 +74,7 @@ message ControlCommand {
       CommandGetSn getsn = 6;
       CommandChangeMode mode_set = 7;
       CommanTouchWay touch_set = 8;
-      bool is_open_voice = 9;              //是否开启录音
+      CommandSetVoice set_voice = 9;      // 录音控制
       CommandSetBind set_bind = 10;        //是否解绑蓝牙
   }
 }

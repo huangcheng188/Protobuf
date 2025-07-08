@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+// 替换为你的包名
+//option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+//option java_outer_classname = "GlassesSettingsProto";
+
+//消息主体类型
+enum GlassesSettingsMessageType {//AutomaticScreenIllumination
+    AUTO_MATIC_SCREEN_ILLUMINATION = 0;//通知是否自动亮屏
+    DO_NOT_DISTURB_MODE = 1;//设置勿扰模式
+    WEAR_DETECTION = 2;//佩戴检测
+    SYSTEM_SOUND = 3;//系统音效
+    CONTROL_MUSIC = 4;//熄屏时控制音乐
+    GLASSES_OPERATION_GUIDE = 5;    //展示眼镜操作引导
+    SHOW_OPERATING_INSTRUCTIONS = 6;//展示新手引导页面(无消息体)
+    CHANGE_GLASSES_NAME= 7;//修改眼镜名称
+    LONG_PRESS_GO_KEY= 8;//设置长按go键
+    AUTOMATICALLY_TURN_OFF_SCREEN = 9;//自动熄屏时间
+    SYSTEM_FONT_SIZE = 10;//设置字体大小
+    SYSTEM_LANGUAGE = 11;//设置系统语言
+    APP_SHOW_SETTING = 12;//设置应用显示或者隐藏
+    APP_ORDER_MODEL = 13;//设置应用顺序
+    MOBILE_NOTIFY_CIRCULATION_MODEL = 14;//手机通知流转开关
+    NOTIFY_BROADCAST_MODEL = 15;// 手机通知播报开关
+    FIRMWARE = 16; //固件传输
+    FIRMWARE_RESP = 17;//固件传输返回值
+    FIRMWARE_INSTALL_COMMAND= 18;//固件安装命令
+    APP_NOTIFICATION_INFO= 19;//三方应用通知消息
+}
+
+//消息主体
+message GlassesSettings {
+    GlassesSettingsMessageType msg_type = 1;
+    oneof Command
+    {
+     uint32 isOpen = 2; // 0:关闭；1:开启
+     GlassesNameChange glassesNameChange = 3;
+     AppFunctions appFunctions = 4;//长按Go键设置时传输
+     AutomaticallyTurnOffScreen automaticallyTurnOffScreen = 5;
+     SystemFontSize systemFontSize = 6;
+     SystemLanguage systemLanguage = 7;
+     AppShowSetting appShowSetting = 8;
+     AppOrderModel appOrderModel = 9;
+     AppNotificationSettingModel appNotificationSettingModel = 10;
+     Firmware firmware = 11;
+     FirmwareResp firmwareResp  = 12;
+     AppNotificationInfo appNotificationInfo = 13;
+    }
+}
+
+message AppShowSetting{
+   AppFunctions appFunctions = 1;
+   uint32 isShow = 2;// 0:隐藏；1:显示
+}
+
+message AppOrderModel{
+    repeated AppShowSetting appShowSettings = 1;  //排序列表
+}
+
+//三方应用通知信息
+message AppNotificationInfo{
+   bytes packageName = 1;
+   bytes labelName =2;
+   bytes title = 3;
+   bytes content = 4;
+   uint64 time = 5;
+}
+
+//手机通知流转和手机通知播报
+message AppNotificationSettingModel{
+   bytes  appName = 1; //app名字
+   uint32 isOpen = 2;  // 0:关闭；1:开启
+}
+
+
+message GlassesNameChange{
+   bytes glassesName = 1; //眼镜名称
+}
+
+//蓝牙连接成功后应推送固件版本（看看是不是和眼镜信息如型号，序列号一起传过来）
+message FirmwareInfoResp  {
+   uint32 firmwareVersion = 1;  //固件版本
+}
+
+message Firmware{
+   bytes  firmware = 1; //固件
+   uint32 firmwareVersion = 2;  //固件版本
+}
+
+// 眼镜端返回文档接收状态
+message FirmwareResp  {
+     float progress = 1;  // 进度
+     uint32 transferStatus  = 2;//0:传输中；1:传输成功；2：传输失败 3:已有最新版本固件包（未安装）；4:已是最新版本（已安装）
+}
+
+//应用
+enum AppFunctions {
+    AR_KNOWS_PEOPLE = 0;//AR识人
+    SPEECH_PROPOSAL= 1;//演讲提词
+    DIALOGUE_TRANSLATION = 2;//对话翻译
+    SIBILONG_TRANSLATION = 3;//同传翻译
+    TAKE_PICTURE = 4;//拍照
+    LONG_PRESS_VIDEO = 5;    //录像
+    LIGHT_SHORTHAND = 6;//轻语速记
+    SUPER_RECORDING= 7;//超能录音
+    VOICE_SUBTITLES= 8;//语音字幕
+    INMO_AI= 9;//调节应用顺序里包含；长按Go键里不包含
+}
+
+//自动熄屏时间
+enum AutomaticallyTurnOffScreen {
+    TIME_15_SECONDS = 0;
+    TIME_30_SECONDS = 1;
+    TIME_2_MINUTES = 2;
+    TIME_5_MINUTES = 3;
+    TIME_1_HOUR = 4;
+}
+
+ // 系统字体大小
+enum SystemFontSize {
+     SMALL_FONTS = 0;
+     STANDARD_FONTS = 1;
+     LARGE_FONTS = 2;
+     LARGEST_FONTS = 3;
+}
+
+
+// 系统语言
+enum SystemLanguage {
+     CHINESE = 0;
+     HTRADITIONAL_CHINESE = 1;
+     ENGLISH = 2;
+     JAPANESE = 3;
+     KOREAN = 4;
+     LANGUAGE_1 = 5;
+     LANGUAGE_2 = 6;
+     LANGUAGE_3 = 7;
+     LANGUAGE_4 = 8;
+     LANGUAGE_5 = 9;
+     LANGUAGE_6 = 10;
+}

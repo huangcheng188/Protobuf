@@ -19,4 +19,6 @@ enum MessageType {
     STARTING_APPLICATION = 15;  // 启动应用
     OTA = 16;                   // OTA
     OTHER_CONTROL_COMMANDS = 17;// 其他主从控制指令
+    GLASSES_SETTINGS = 18;      // 眼镜设置
+    GLASSES_STATE    = 19;      // 眼镜状态同步
 }
