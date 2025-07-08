@@ -8,6 +8,8 @@ import "AudioData.proto";
 import "TranslationMaster.proto";
 import "TouchDate.proto";
 import "Ble_Bt_BindControl.proto";
+import "SpeechInscription.proto";
+import "GlassesSettings.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -21,6 +23,8 @@ oneof Data {
     // DeviceStatus status = 6;
     TranslationMaster translate = 8;
     TP_Command touch = 9;
-    BLE_BT_Status ble_bt_status = 10;
+     BLE_BT_Status ble_bt_status = 10;
+     SpeechInscription speechInscription = 11;
+     GlassesSettings glassesSettings = 12;
   }
 }
