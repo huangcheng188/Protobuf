@@ -1,10 +1,10 @@
 syntax = "proto3";
 
 // 替换为你的包名
-option java_package = "com.inmo.app.module_go3device";
+//option java_package = "com.inmo.app.module_go3device";
 
 // 生成的外部类名
-option java_outer_classname = "GlassesSettingsProto";
+//option java_outer_classname = "GlassesSettingsProto";
 
 //消息主体类型
 enum GlassesSettingsMessageType {//AutomaticScreenIllumination
