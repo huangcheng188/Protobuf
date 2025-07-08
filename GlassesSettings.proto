@@ -7,7 +7,7 @@ syntax = "proto3";
 //option java_outer_classname = "GlassesSettingsProto";
 
 //消息主体类型
-enum GlassesSettingsMessageType {//AutomaticScreenIllumination
+enum GlassesSettingsMessageType {
     AUTO_MATIC_SCREEN_ILLUMINATION = 0;//通知是否自动亮屏
     DO_NOT_DISTURB_MODE = 1;//设置勿扰模式
     WEAR_DETECTION = 2;//佩戴检测
