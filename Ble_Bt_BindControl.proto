@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+enum StatusBind {
+  APP_TO_GLASS_ONLY_BLE_OK = 0;            //app连接眼镜只有ble可以
+  APP_TO_GLASS_ONLY_BT_OK = 1;             //app连接眼镜只有bt可以
+  APP_TO_GLASS_BT_AND_BLE_OK = 2;          //app连接眼镜ble和bt都可以
+  APP_REQUEST_BLE = 3;                     //app请求连接眼镜ble
+  APP_REQUEST_BT = 4;                      //app请求连接眼镜bt
+  GLASS_REQUEST_BLE = 5;                   //眼镜请求连接app的ble
+  GLASS_REQUEST_BT = 6;                    //眼镜请求连接app的bt
+  APP_REQUEST_UNBIND = 7;                  //app请求解绑眼镜
+  GLASS_REQUEST_UNBIND = 8;                //眼镜请求解绑app
+  SUCCESSS_BIND = 9;                       //绑定成功
+}
+
+message UserData {
+  uint32 UserID = 1;                   //用户ID
+}
+
+message BLE_BT_Status {
+  bool glass_bind  = 1;                //眼镜已绑定
+  bool Phone_bind  = 2;                //手机已绑定
+  UserData user_details = 3;           //用户详情
+  StatusBind  statustype = 4;          //绑定状态
+}
