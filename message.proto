@@ -9,6 +9,7 @@ import "TranslationMaster.proto";
 import "TouchDate.proto";
 import "SpeechInscription.proto";
 import "GlassesSettings.proto";
+import "ImgManager.proto";
 import "MessageStatus.proto";
 
 message Message {
@@ -23,7 +24,8 @@ oneof Data {
     MessageStatus status = 6;
     TranslationMaster translate = 7;
     TP_Command touch = 8;
-    SpeechInscription speechInscription = 11;
-    GlassesSettings glassesSettings = 12;
+    SpeechInscription speechInscription = 9;
+    ImgManager imgManager = 14;
+    GlassesSettings glassesSettings = 16;
   }
 }

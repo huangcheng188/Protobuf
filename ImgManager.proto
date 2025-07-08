@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+// 替换为你的包名
+//option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+//option java_outer_classname = "ImgManagerProto";
+
+//消息主体类型
+enum ImgManagerMessageType {
+    CAMERA_COMMAND_TYPE = 0;
+    CAMERA_STATE_RESP = 1;
+}
+
+//消息主体
+message ImgManager {
+    ImgManagerMessageType msg_type = 1;
+    oneof Command
+    {
+        CameraCommandType cameraCommandType = 2;
+        CameraStateResp cameraStateResp = 3;
+    }
+}
+
+enum CameraCommandType {
+    START_TAKING_PHOTOS = 0;      // 启动拍照
+    START_RECORDING = 1;    // 启动录像
+    REQUEST_CAMERA_STATE = 2;      // 请求相机状态
+    PAUSE_SYNC = 3;//暂停同步
+    RESUME_SYNC = 4;//恢复同步
+}
+
+enum CameraStateResp{
+    STATE_TAKING_PHOTOS = 0;      // 正在拍照
+    STATE_RECORDING = 1;    // 正在录像
+    STATE_IDLE = 2;      // 空闲状态
+}
+
+
