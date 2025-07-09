@@ -10,7 +10,7 @@ import "TouchDate.proto";
 import "SpeechInscription.proto";
 import "GlassesSettings.proto";
 import "ImgManager.proto";
-import "MessageStatus.proto";
+import "MessageState.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -21,7 +21,7 @@ oneof Data {
     // ImageData image = 3;
     ControlCommand command = 4;
     // CommandResponse response = 5;
-    MessageStatus status = 6;
+    MessageState status = 6;
     TranslationMaster translate = 7;
     TP_Command touch = 8;
     SpeechInscription speechInscription = 9;
