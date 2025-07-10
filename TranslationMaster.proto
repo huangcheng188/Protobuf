@@ -38,6 +38,7 @@ message TranslationTextContent {
     bytes original_text = 1;
     bytes translation_text = 2;
     TranslationRole role = 3;
+    bool isFinished = 4;
 }
 
 //消息主体类型

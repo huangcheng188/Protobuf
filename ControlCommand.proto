@@ -27,10 +27,16 @@ enum CommandMode {
   MOUSE_MODE = 2;           // 鼠标模式
 }
 
-enum CommanTouchWay {
-  LongPass =   0;           // 长按模式
+enum CommanTouchWayType {
+  LoogPass =   0;           // 长按模式
   Click    =   1;           // 点击模式
   Drag     =   2;           // 拖动模式
+}
+
+message CommanTouchWay {
+  CommanTouchWayType touch = 1;
+  uint32 xPercentage = 2;   //x轴百分比
+  uint32 yPercentage = 3;   //y轴百分比
 }
 
 message CommandVolume {
