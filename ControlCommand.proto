@@ -42,9 +42,9 @@ enum CommanTouchDirection {
 
 message CommanTouchWay {
     CommanTouchWayType touch_type = 1;
-    CommanTouchDirection touch = 2;      //滑动方向
-    uint32 xPercentage = 3;             //x轴百分比
-    uint32 yPercentage = 4;             //y轴百分比
+    CommanTouchDirection touch_direction = 2;      //滑动方向
+    uint32 xPercentage = 3;                         //x轴百分比
+    uint32 yPercentage = 4;                          //y轴百分比
 }
 
 message CommandVolume {
