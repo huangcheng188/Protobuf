@@ -1,5 +1,20 @@
 syntax = "proto3";
 
+//option java_package = "com.inmo.app.module_go3device";
+//option java_outer_classname = "MessageStateProto";
+
+message MessageState{
+
+  Synchronous  synch = 1;              //同步操作
+
+  UserData user_details = 2;           //用户详情
+
+  oneof Status {
+    BLE_BT_Status blue_tooch = 3;
+    WifiData      wifi_data  = 4;
+  }
+}
+
 //wifi状态同步
 message FileInfo {
   uint32 file_type = 2;   		//0:图片   1:视频
@@ -43,16 +58,4 @@ enum Synchronous {
   STOP_SYNCH    = 1;
   RESTART_SYNCH = 2;
   NOT_PERFORM   = 3;
-}
-
-message MessageStatus{
-  
-  Synchronous  synch = 1;              //同步操作
-
-  UserData user_details = 2;           //用户详情
-  
-  oneof Status {
-    BLE_BT_Status blue_tooch = 3;
-    WifiData      wifi_data  = 4;
-  }
 }
