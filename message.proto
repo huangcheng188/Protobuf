@@ -25,7 +25,6 @@ oneof Data {
     AudioData audio = 3;
     ImageData image = 4;
     ControlCommand command = 5;
-    MessageState status = 6;
     TranslationMaster translate = 11;
     SpeechInscription speechInscription = 12;
     SuperRecord superRecord = 13;
@@ -33,6 +32,7 @@ oneof Data {
     FastSpeedNote fastSpeedNote = 15;
     ArIdentifyResponse arIdentify = 16;
     ImgManager imgManager = 17;
+    MessageState status = 20;
     GlassesSettings glassesSettings = 22;
     TP_Command touch = 24;
     }
