@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+// 替换为你的包名
+option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+option java_outer_classname = "SuperRecordProto";
+
+// 消息主体类型
+enum SuperRecordMessageType {
+    SUPER_RECORD_COMMAND = 0;        // 录音启动和退出等控制命令
+    SUPER_RECORD_ASR     = 1;        // ASR内容的传输
+    SUPER_RECORD_ONLINE  = 2;        // app 连接眼镜时互相通信的类
+    SUPER_RECORD_OFFLINE = 3;        // 眼镜断开 app 时记录的录音内容，等 app 再连接上眼镜时发送给 app 使用
+}
+
+// 消息主体
+message SuperRecord {
+    SuperRecordMessageType           msg_type         = 1;  // 消息类型
+    oneof Command {
+        SuperRecordCommand           super_record_command          = 2;  // 录音控制命令
+        SuperRecordAsrContent        super_record_asr_content  = 3;  // ASR内容
+        SuperRecordContent           online_content   = 4;  // APP识别的录音内容，文字包括时间戳，录音走另外的通道
+        SuperRecordOffineContent     offline_content  = 5;  // 离线录音内容，音频文件和图片列表包括各自的时间戳
+    }
+}
+
+// 录音启动和退出等控制命令
+enum SuperRecordCommand {
+    START_SUPERRE_RECORD         = 0;  // 开始录音
+    STOP_SUPERRE_RECORD          = 1;  // 停止录音
+    TIMEOUT_STOP_SUPERRE_RECORD  = 2;  // 超时停止录音
+    NO_MEMORY_STOP_SUPERRE_RECORD= 3;  // 内存不足停止录音
+    PAUSE_SUPERRE_RECORD         = 4;  // 暂停录音
+    RESUME_SUPERRE_RECORD        = 5;  // 继续录音
+    START_SUPERRE_RECORD_OFFLINE = 6;  // 开始发送离线录音，可能有多条，现在写的是一次传一个
+    STOP_SUPERRE_RECORD_OFFLINE   = 7;  // 停止录音
+}
+
+//ASR内容
+message SuperRecordAsrContent {
+    bytes       super_record_content            = 1;  // asr 内容
+    bool        super_record_isfinish           = 2;  // 这句asr是否结束
+}
+
+// 录音内容
+message SuperRecordContent {
+    bytes       role         = 1;  // 角色 用户名  分辨不出就传空字符串
+    bytes       content      = 2;  // app 端传给眼镜端文字内容
+    int64       record_time  = 3;  // 时间戳，录音开始算第 0 秒，单位 s，1 代表 第1 秒
+    bool        is_new       = 4;  // 是否是新的文本内容，true时是新的一句话，false时是旧的话在原来的基础上刷新文案
+}
+
+
+// 离线录音内容，当断开 app 时眼镜端单独记录的录音完整内容
+message SuperRecordOffineContent {
+    SuperRecordAudioInfo           audio_info  = 1;  // 音频信息
+    int64                          create_time = 2;  // 创建录音的时间戳，代表几几年几月几日的时间，单位 ms，1000 代表 1 秒
+}
+
+// 录音文件信息类，包括了录音文件的 byte、时间戳和录音时长
+message SuperRecordAudioInfo {
+    bytes  audio_data = 1;  // 音频数据
+    int64  duration   = 2;  // 录音时长，单位 ms
+}

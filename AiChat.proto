@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+// 替换为你的包名
+option java_package = "com.inmo.app.module_go3device";
+// 生成的外部类名
+option java_outer_classname = "AiChatProto";
+
+// 消息主体类型
+enum AiChatMessageType {
+  AiChat_COMMAND     = 0;        // AI 启动和退出等控制命令
+  AiChat_CONTENT     = 1;        // 文本内容传输，包括问题、深度思考内容、回答
+  AiChat_ASR         = 2;        // ASR内容的传输
+  AiChat_EXCEPTION   = 3;        //异常信息
+}
+
+// 消息主体
+message AiChat {
+  AiChatMessageType msg_type     = 1;  // 消息类型
+  oneof Command {
+    AiChatCommand   chat_command = 2;  // AI 控制命令
+    AiChatContent   chat_content = 3;  // AI 文本内容
+    AsrContent      asr_content  = 4;  // ASR内容
+    AiException     ai_exception = 5;  // 异常内容
+  }
+}
+
+// AI 启动和退出等控制命令
+enum AiChatCommand {
+  START_AI          = 0;  // 开始 AI 聊天
+  STOP_AI           = 1;  // 停止 AI 聊天
+  MUTE_TTS          = 2;  // MUTE TTS
+  OPEN_TTS          = 3;  // OPEN TTS
+  STOP_ANSWER       = 4;  // 停止回答
+  OPEN_DEEPTHINK    = 5;  // 打开深度思考
+  CLOSE_DEEPTHINK   = 6;  // 关闭深度思考
+}
+
+// AI 文本内容
+message AiChatContent {
+  AiChatRole  role               = 1;  // 角色，0 - 用户，1 - AI
+  bytes       content            = 2;  // 当 role 是用户时，代表问题内容；当 role 是 AI 时，代表回答内容
+  bytes       thinking_content   = 3;  // 深度思考内容
+  bool        thinking_enabled   = 4;  // 是否开启深度思考
+  State       state              = 5;  // 当前状态：0 - 未开始，1 - 思考开始，2 - 思考停止，3 - 思考结束，4 - 回答开始，5 - 回答结束
+}
+
+//ASR内容
+message AsrContent {
+  bytes       content            = 1;  // asr 内容
+  bool        isfinish           = 2;  // 这句asr是否结束
+}
+message AiException {
+  int32       code               = 1;  // 异常代码 =1001 表示 网络异常
+  bytes       content            = 2;  // 异常 内容
+}
+// AI 角色
+enum AiChatRole {
+  AICHAT_USER_ROLE       = 0;  // 用户角色
+  AICHAT_ASSISTANT_ROLE  = 1;  // AI 角色
+}
+
+// 状态
+enum State {
+  ANSWER_PROCESS_OLD     = 0;  // 非当前回答
+  THINKING_PROCESS_START = 1;  // 思考开始
+  THINKING_PROCESS_STOP  = 2;  // 思考停止
+  THINKING_PROCESS_END   = 3;  // 思考结束
+  ANSWER_PROCESS_START   = 4;  // 回答开始
+  ANSWER_PROCESS_END     = 5;  // 回答结束
+  UNSTART                = 6;  // 未开始
+}

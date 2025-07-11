@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+// 替换为你的包名
+option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+option java_outer_classname = "VoiceSubtitleProto";
+
+// 消息主体类型
+enum VoiceSubtitleMessageType {
+    VOICE_SUBTITLE_COMMAND = 0;        // 语音字幕启动和退出等控制命令
+    VOICE_SUBTITLE_ASR     = 1;        // ASR内容的传输
+}
+
+// 消息主体
+message VoiceSubtitle {
+    VoiceSubtitleMessageType           msg_type         = 1;  // 消息类型
+    oneof Command {
+        VoiceSubtitleCommand           voice_subtitle_command          = 2;  // 语音字幕控制命令
+        VoiceSubtitleAsrContent        voice_subtitle_asr_content  = 3;  // ASR内容
+    }
+}
+
+// 语音字幕启动和退出等控制命令
+enum VoiceSubtitleCommand {
+    START_VOICE_SUBTITLE       = 0;  // 开始语音字幕
+    STOP_VOICE_SUBTITLE        = 1;  // 停止语音字幕
+}
+
+//ASR内容
+message VoiceSubtitleAsrContent {
+    bytes       voice_subtitle_content            = 1;  // asr 内容
+    bool        voice_subtitle_isfinish           = 2;  // 这句asr是否结束
+}

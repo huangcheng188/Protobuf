@@ -33,10 +33,18 @@ enum CommanTouchWayType {
   Drag     =   2;           // 拖动模式
 }
 
+enum CommanTouchDirection {
+    TOP     = 0;
+    BOTTOM  = 1;
+    LEFT    = 2;
+    RIGHT   = 3;
+}
+
 message CommanTouchWay {
-  CommanTouchWayType touch = 1;
-  uint32 xPercentage = 2;   //x轴百分比
-  uint32 yPercentage = 3;   //y轴百分比
+    CommanTouchWayType touch_type = 1;
+    CommanTouchDirection touch_direction = 2;      //滑动方向
+    uint32 xPercentage = 3;                         //x轴百分比
+    uint32 yPercentage = 4;                          //y轴百分比
 }
 
 message CommandVolume {

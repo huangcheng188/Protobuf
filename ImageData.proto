@@ -1,8 +1,11 @@
 syntax = "proto3";
 
+import "ImageModelType.proto";
+
 message ImageData {
   uint64 timestamp = 1;
   uint32 width = 2;
   uint32 height = 3;
   bytes image_data = 4;    // jpeg压缩后的图像数据
+  ImageModelType image_type = 5;
 }

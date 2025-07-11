@@ -1,9 +1,12 @@
 syntax = "proto3";
 
+import "AudioModelType.proto";
+
 message AudioHeader {
   uint32 sample_rate = 1;  // 采样率（单位Hz）
   uint32 channels = 2;     // 声道数
   uint32 bitrate = 3;      // 比特率（kbps）
+  AudioModelType audio_type = 4;  //音频数据对应的模块类型
 }
 
 message AudioData {

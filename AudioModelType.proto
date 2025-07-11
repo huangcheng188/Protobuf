@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+enum AudioModelType {
+    AUDIO_TRANSLATION_MASTER  = 0;            //翻译模块
+    AUDIO_SOUND_RECORD = 1;                   // 超能录音
+    AUDIO_AI_ASSISTANT = 2;                   // AI助手
+    AUDIO_CONVERSATION_RECORD = 3;            // 轻语速记
+    AUDIO_VOICE_SUBTITLE = 4;            // 语音字幕
+}
