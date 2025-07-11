@@ -16,6 +16,7 @@ import "GlassesSettings.proto";
 import "ImgManager.proto";
 import "MessageState.proto";
 import "ArIdentifyResponse.proto";
+import "SwitchApplication.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -32,6 +33,7 @@ oneof Data {
     FastSpeedNote fastSpeedNote = 15;
     ArIdentifyResponse arIdentify = 16;
     ImgManager imgManager = 17;
+    SwitchApplication switchApp = 18;
     MessageState status = 20;
     GlassesSettings glassesSettings = 22;
     TP_Command touch = 24;
