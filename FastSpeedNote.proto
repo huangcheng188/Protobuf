@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+// 替换为你的包名
+option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+option java_outer_classname = "FastSpeedNoteProto";
+
+// 消息主体类型
+enum FastSpeedNoteMessageType {
+    FastSpeedNote_COMMAND = 0;        // 速记启动和退出等控制命令
+    FastSpeedNote_ASR     = 1;        // ASR内容的传输
+    FastSpeedNote_ONLINE  = 2;        // app 连接眼镜时互相通信的类
+    FastSpeedNote_OFFLINE = 3;        // 眼镜断开 app 时记录的速记内容，等 app 再连接上眼镜时发送给 app 使用
+}
+
+// 消息主体
+message FastSpeedNote {
+    FastSpeedNoteMessageType            msg_type         = 1;  // 消息类型
+    oneof Command {
+        FastSpeedNoteCommand            speed_note_command          = 2;  // 速记控制命令
+        FastSpeedNoteAsrContent         speed_note_asr_content  = 3;  // ASR内容
+        FastSpeedNoteContent            online_content   = 4;  // 速记内容，文字和图片包括时间戳，录音走另外的通道
+        FastSpeedNoteOfflineContent     offline_content  = 5;  // 离线速记内容，音频文件和图片列表包括各自的时间戳
+    }
+}
+
+// 速记启动和退出等控制命令
+enum FastSpeedNoteCommand {
+    START_SPEEDNOTE             = 0;  // 开始速记
+    STOP_SPEEDNOTE              = 1;  // 停止速记
+    TIMEOUT_STOP_SPEEDNOTE      = 2;  // 超时停止速记
+    NO_MEMORY_STOP_SPEEDNOTE    = 3;  // 内存不足停止录音
+    START_SPEEDNOTE_OFFLINE     = 4;  // 开始发送离线速记，可能有多条，现在写的是一次传一个
+    STOP_SPEEDNOTE_OFFLINE      = 5;  // 停止速记
+}
+
+//ASR内容
+message FastSpeedNoteAsrContent {
+    bytes       speednote_content            = 1;  // asr 内容
+    bool        speednote_isfinish           = 2;  // 这句asr是否结束
+}
+
+// 速记内容
+message FastSpeedNoteContent {
+    ContentType type        = 1;  // 消息类型：TEXT - 文字，IMAGE - 图片
+    bytes       content     = 2;  // app 端传给眼镜端文字内容
+    bytes       photo       = 3;  // 眼镜端传给 app 端的图片
+    int64       event_time  = 4;  // 事件时间戳，录音开始算第 0 秒，单位 ms，1000 代表 1 秒
+    bool        is_new      = 5;  // 是否是新的文本内容，true 代表是新的文本内容，false 代表是旧的文本内容
+}
+
+enum ContentType {
+    SPEEDNOTE_TEXT  = 0;  // 文字
+    SPEEDNOTE_IMAGE = 1;  // 图片
+}
+
+// 离线速记内容，当断开 app 时眼镜端单独记录的速记完整内容
+message FastSpeedNoteOfflineContent {
+    AudioInfo          audio_info  = 1;  // 音频信息
+    repeated FastSpeedNotePhotoInfo photo_list  = 2;  // 图片信息列表
+    int64              create_time = 3;  // 创建速记的时间戳，代表几几年几月几日的时间，单位 ms，1000 代表 1 秒
+}
+
+// 录音文件信息类，包括了录音文件的 byte、时间戳和录音时长
+message AudioInfo {
+    bytes  audio_data = 1;  // 音频数据
+    int64  duration   = 2;  // 录音时长，单位 ms
+}
+
+// 图片信息类，包括了图片的 byte 和时间戳
+message FastSpeedNotePhotoInfo {
+    bytes  photo_data = 1;  // 图片数据
+    int64  event_time = 2;  // 事件时间戳，录音开始算第 0 秒，单位 ms，1000 代表 1 秒
+}
