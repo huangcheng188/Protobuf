@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message ArIdentifyResponse {
+    bytes name = 1;                 //名片名字
+    bytes jobPosition = 2;          //工作职位
+    bytes company = 3;              //公司名字
+}

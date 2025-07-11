@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+enum ImageModelType {
+    IAMGE_AR_IDENTIFY  = 0;            //ar识人
+}

@@ -5,12 +5,14 @@ package message;
 import "MessageType.proto";
 import "ControlCommand.proto";
 import "AudioData.proto";
+import "ImageData.proto";
 import "TranslationMaster.proto";
 import "TouchDate.proto";
 import "SpeechInscription.proto";
 import "GlassesSettings.proto";
 import "ImgManager.proto";
 import "MessageState.proto";
+import "ArIdentifyResponse.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -18,14 +20,14 @@ message Message {
   
 oneof Data {
     AudioData audio = 3;
-    // ImageData image = 3;
-    ControlCommand command = 4;
-    // CommandResponse response = 5;
+    ImageData image = 4;
+    ControlCommand command = 5;
     MessageState status = 6;
-    TranslationMaster translate = 7;
-    TP_Command touch = 8;
-    SpeechInscription speechInscription = 9;
-    ImgManager imgManager = 14;
-    GlassesSettings glassesSettings = 16;
-  }
+    TranslationMaster translate = 11;
+    SpeechInscription speechInscription = 12;
+    ArIdentifyResponse arIdentify = 16;
+    ImgManager imgManager = 17;
+    GlassesSettings glassesSettings = 22;
+    TP_Command touch = 24;
+    }
 }
