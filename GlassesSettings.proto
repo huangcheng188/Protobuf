@@ -27,7 +27,6 @@ enum GlassesSettingsMessageType {
     FIRMWARE = 16; //固件传输
     FIRMWARE_RESP = 17;//固件传输返回值
     FIRMWARE_INSTALL_COMMAND= 18;//固件安装命令
-    APP_NOTIFICATION_INFO= 19;//三方应用通知消息
 }
 
 //消息主体
@@ -46,7 +45,6 @@ message GlassesSettings {
      AppNotificationSettingModel appNotificationSettingModel = 10;
      Firmware firmware = 11;
      FirmwareResp firmwareResp  = 12;
-     AppNotificationInfo appNotificationInfo = 13;
     }
 }
 
@@ -57,15 +55,6 @@ message AppShowSetting{
 
 message AppOrderModel{
     repeated AppShowSetting appShowSettings = 1;  //排序列表
-}
-
-//三方应用通知信息
-message AppNotificationInfo{
-   bytes packageName = 1;
-   bytes labelName =2;
-   bytes title = 3;
-   bytes content = 4;
-   uint64 time = 5;
 }
 
 //手机通知流转和手机通知播报

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+// 替换为你的包名
+option java_package = "com.inmo.app.module_go3device";
+
+// 生成的外部类名
+option java_outer_classname = "RingSettingsProto";
+
+//消息主体类型
+enum RingSettingsMessageType {
+    RING_OPERATION_GUIDE = 0;//展示戒指操作引导
+    CHANGE_RING_NAME= 1;//修改戒指名称
+    RING_FIRMWARE = 2;//固件传输
+    RING_FIRMWARE_INSTALL_COMMAND= 4;//固件安装命令
+}
+
+//消息主体
+message RingSettings {
+    RingSettingsMessageType msg_type = 1;
+    oneof Command
+    {
+     RingNameChange ringNameChange = 2;
+     RingFirmware firmware = 3;
+     RingFirmwareResp firmwareResp  = 4;
+    }
+}
+
+message RingNameChange{
+   bytes ringNameChange = 1; //名称
+}
+
+// 蓝牙连接成功后应推送固件版本（看看是不是和戒指信息如型号，序列号一起传过来）
+message RingFirmwareInfoResp  {
+   uint32 firmwareVersion = 1;  //固件版本
+}
+
+message RingFirmware{
+   bytes  firmware = 1; //固件
+   uint32 firmwareVersion = 2;  //固件版本
+}
+
+// 眼镜端返回固件接收状态
+message RingFirmwareResp  {
+     float progress = 1;  // 进度
+     uint32 transferStatus  = 2;//0:传输中；1:传输成功；2：传输失败 3:已有最新版本固件包（未安装）；4:已是最新版本（已安装）
+}

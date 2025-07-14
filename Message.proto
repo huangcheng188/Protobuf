@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option java_package = "com.inmo.app.module_go3device";// 替换为你的包名
+option java_outer_classname = "MessageProto";// 生成的外部类
+
+import "MessageType.proto";
+import "AudioData.proto";
+import "ImageData.proto";
+import "ControlCommand.proto";
+import "TranslationMaster.proto";
+import "SpeechInscription.proto";
+import "AiChat.proto";
+import "FastSpeedNote.proto";
+import "SuperRecord.proto";
+import "VoiceSubtitle.proto";
+import "SwitchApplication.proto";
+import "GlassesSettings.proto";
+import "ImgManager.proto";
+import "MessageState.proto";
+import "ArIdentifyResponse.proto";
+import "RingSettings.proto";
+import "MessageReminder.proto";
+
+message Message {
+    uint32 version = 1;  // 协议版本号
+    MessageType msg_type = 2; //消息类型
+
+    oneof Data {
+        AudioData audio = 3;
+        ImageData image = 4;
+        ControlCommand command = 5;
+         MessageReminder messageReminder= 7;
+//        CommandResponse response = -1;
+        TranslationMaster translate = 11;
+        SpeechInscription speechInscription = 12;
+        SuperRecord superRecord = 13;
+        AiChat aiChat = 14;
+        FastSpeedNote fastSpeedNote = 15;
+        ArIdentifyResponse arIdentify = 16;
+        ImgManager imgManager = 17;
+        SwitchApplication switchApp = 18;
+        MessageState status = 20;
+        VoiceSubtitle voiceSubtitle = 21;
+        GlassesSettings glassesSettings = 22;
+        RingSettings ringSettings = 24;
+    }
+}

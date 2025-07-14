@@ -17,8 +17,9 @@ message MessageState{
 
 //wifi状态同步
 message FileInfo {
-  uint32 file_type = 2;   		//0:图片   1:视频
-  uint64 create_time = 3;       // 文件创建时间（时间戳，单位：秒）
+  uint32 file_type = 1;   		//0:图片   1:视频
+  uint64 create_time = 2;       // 文件创建时间（时间戳，单位：秒）
+  uint64 file_size = 3;       // 文件字节大小
 }
 
 message WifiData {
