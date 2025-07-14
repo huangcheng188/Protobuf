@@ -8,7 +8,22 @@ syntax = "proto3";
 
 //消息主体类型
 enum MessageReminderMessageType {
-    APP_NOTIFICATION_INFO= 0;//三方应用通知消息
+    APP_NOTIFICATION_INFO= 0; // 三方应用通知消息
+    USER_CALL_INFO       = 1; // 电话通知
+}
+
+enum CallType {
+    INCOMING = 0; //来电
+    OUTGOING = 1; //去电
+    MISSED = 2;   //未接
+}
+
+//电话通知信息
+message MobilePhoneNotif {
+    bytes contact_name = 1;
+    bytes phone_number = 2;
+    CallType type      = 3;   // 来电类型：来电、去电、未接
+    int64 timestamp    = 4;   // 时间戳
 }
 
 //消息主体
@@ -16,7 +31,8 @@ message MessageReminder {
     MessageReminderMessageType msg_type = 1;
     oneof Command
     {
-     AppNotificationInfo appNotificationInfo = 2;
+     AppNotificationInfo app_notification_info = 2;
+     MobilePhoneNotif    mobile_phone_notif  = 3;   //电话通知
     }
 }
 
