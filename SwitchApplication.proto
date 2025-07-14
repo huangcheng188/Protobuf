@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+enum SwitchApplicationType {
+    SWITCHPP_TRANSLATION_MASTER_SIMULTANEOUS = 0;       // 同传翻译
+    SWITCHPP_TRANSLATION_MASTER_DIALOGUE = 1;           // 对话翻译
+    SWITCHPP_SPEECH_INSCRIPTION = 2;                    // 演讲题词
+    SWITCHPP_SOUND_RECORD = 3;                          // 超能录音
+    SWITCHPP_AI_ASSISTANT = 4;                          // AI助手
+    SWITCHPP_CONVERSATION_RECORD = 5;                   // 轻语速记
+    SWITCHPP_AR_FACE_RECOGNITION = 6;                   // AR识人
+    SWITCHPP_IMG_MANAGER = 7;                           // 图像和相册管理
+}
+
+//打开或者关闭
+enum OpenOrCloseType {
+    APP_OPEN = 0;
+    APP_CLOSE = 1;
+}
+
+message SwitchApplication {
+    SwitchApplicationType msg_type = 1;
+    OpenOrCloseType open_or_close_type = 2;
+}
