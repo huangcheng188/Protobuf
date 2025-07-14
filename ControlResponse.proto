@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+enum StatusCode {
+  SUCCESS = 0;
+  INVALID_PARAM = 1;
+  UNSUPPORTED_CMD = 2;
+  DEVICE_BUSY = 3;
+}
+
+message ControlResponse {
+  CommandType original_cmd = 1;
+  StatusCode status = 2;
+  uint32 command_volume = 3;
+  oneof Response
+  {
+      ResponseGetSn sn = 1;
+  }
+}
+
+message ResponseGetSn {
+  bytes sn = 1;
+}

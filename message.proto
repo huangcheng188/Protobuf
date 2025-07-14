@@ -20,6 +20,7 @@ import "MessageState.proto";
 import "ArIdentifyResponse.proto";
 import "RingSettings.proto";
 import "MessageReminder.proto";
+improt "ControlResponse.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -43,5 +44,6 @@ oneof Data {
     GlassesSettings glassesSettings = 22;
     TP_Command touch = 24;
     RingSettings ringSettings = 25;
+    ControlResponse controlResponse = 26;
     }
 }

@@ -23,4 +23,5 @@ enum MessageType {
     GLASSES_SETTINGS = 19;      // 眼镜设置
     GLASSES_STATE    = 20;      // 眼镜状态同步
     RING_SETTINGS    = 22;      // 戒指设置
+    CONTROL_RESPON   = 23;      // 指令响应 获取sn值
 }
