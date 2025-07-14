@@ -22,5 +22,5 @@ enum MessageType {
     VOICE_SUBTITLE = 18;        // 语音字幕
     GLASSES_SETTINGS = 19;      // 眼镜设置
     GLASSES_STATE    = 20;      // 眼镜状态同步
-    RING_SETTINGS    = 21;      // 戒指设置
+    RING_SETTINGS    = 22;      // 戒指设置
 }
