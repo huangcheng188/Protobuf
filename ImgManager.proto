@@ -26,8 +26,7 @@ enum CameraCommandType {
     START_TAKING_PHOTOS = 0;      // 启动拍照
     START_RECORDING = 1;    // 启动录像
     REQUEST_CAMERA_STATE = 2;      // 请求相机状态
-    PAUSE_SYNC = 3;//暂停同步
-    RESUME_SYNC = 4;//恢复同步
+    QUERY_ALBUM_DATA = 3;      // 查询相册数据
 }
 
 enum CameraStateResp{
