@@ -6,4 +6,5 @@ enum AudioModelType {
     AUDIO_AI_ASSISTANT = 2;                   // AI助手
     AUDIO_CONVERSATION_RECORD = 3;            // 轻语速记
     AUDIO_VOICE_SUBTITLE = 4;            // 语音字幕
+    AUDIO_VOICE_VIDEO   = 5;                  // 录像
 }
