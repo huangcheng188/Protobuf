@@ -20,7 +20,7 @@ import "MessageState.proto";
 import "ArIdentifyResponse.proto";
 import "RingSettings.proto";
 import "MessageReminder.proto";
-improt "ControlResponse.proto";
+import "ControlResponse.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
