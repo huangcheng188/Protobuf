@@ -2,4 +2,5 @@ syntax = "proto3";
 
 enum ImageModelType {
     IAMGE_AR_IDENTIFY  = 0;            //ar识人
+    IAMGE_SPEED_NOTE_IDENTIFY  = 1;     //速记
 }
