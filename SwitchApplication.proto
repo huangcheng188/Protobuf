@@ -9,6 +9,7 @@ enum SwitchApplicationType {
     SWITCHPP_CONVERSATION_RECORD = 5;                   // 轻语速记
     SWITCHPP_AR_FACE_RECOGNITION = 6;                   // AR识人
     SWITCHPP_IMG_MANAGER = 7;                           // 图像和相册管理
+    SWITCHPP_VOICE_SUBTITLE = 8;                           // 语音字幕
 }
 
 //打开或者关闭
