@@ -39,7 +39,7 @@ message MessageReminder {
 //三方应用通知信息
 message AppNotificationInfo{
    //bytes packageName = 1;
-   uint64 type = 1;
+   uint32 type = 1;
    //bytes labelName =2;
    bytes title = 3;
    bytes content = 4;
