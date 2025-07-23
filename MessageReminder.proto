@@ -13,8 +13,8 @@ enum MessageReminderMessageType {
 }
 
 enum CallType {
-    INCOMING = 0; //来电
-    OUTGOING = 1; //去电
+    OUTGOING = 0; //去电
+    INCOMING = 1; //来电
     MISSED = 2;   //未接
 }
 
