@@ -41,7 +41,7 @@ message AiChatContent {
   bytes       content            = 2;  // 当 role 是用户时，代表问题内容；当 role 是 AI 时，代表回答内容
   bytes       thinking_content   = 3;  // 深度思考内容
   bool        thinking_enabled   = 4;  // 是否开启深度思考
-  State       state              = 5;  // 当前状态：0 - 未开始，1 - 思考开始，2 - 思考停止，3 - 思考结束，4 - 回答开始，5 - 回答结束
+  State       state              = 5;  // 当前状态：0 - 非当前回答，1 - 思考开始，2 - 思考停止，3 - 思考结束，4 - 回答开始，5 - 回答结束 6 -未开始
 }
 
 //ASR内容
