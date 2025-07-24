@@ -41,7 +41,7 @@ enum StatusBind {
   GLASS_REQUEST_BT = 6;                    //眼镜请求连接app的bt
   APP_REQUEST_UNBIND = 7;                  //app请求解绑眼镜
   GLASS_REQUEST_UNBIND = 8;                //眼镜请求解绑app
-  GLASS_REQUEST_UNBIND = 9;                //蓝牙断链
+  BLUETOOTH_DISCONN = 9;                   //蓝牙断链
   SUCCESSS_BIND = 10;                      //绑定成功
 }
 
