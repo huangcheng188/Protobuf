@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "ControlCommand.proto";
+
 enum StatusCode {
   SUCCESS = 0;
   INVALID_PARAM = 1;

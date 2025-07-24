@@ -10,23 +10,24 @@ syntax = "proto3";
 enum GlassesSettingsMessageType {
     AUTO_MATIC_SCREEN_ILLUMINATION = 0;//通知是否自动亮屏
     DO_NOT_DISTURB_MODE = 1;//设置勿扰模式
-    WEAR_DETECTION = 2;//佩戴检测
-    SYSTEM_SOUND = 3;//系统音效
-    CONTROL_MUSIC = 4;//熄屏时控制音乐
-    GLASSES_OPERATION_GUIDE = 5;    //展示眼镜操作引导
-    SHOW_OPERATING_INSTRUCTIONS = 6;//展示新手引导页面(无消息体)
-    CHANGE_GLASSES_NAME= 7;//修改眼镜名称
-    LONG_PRESS_GO_KEY= 8;//设置长按go键
-    AUTOMATICALLY_TURN_OFF_SCREEN = 9;//自动熄屏时间
-    SYSTEM_FONT_SIZE = 10;//设置字体大小
-    SYSTEM_LANGUAGE = 11;//设置系统语言
-    APP_SHOW_SETTING = 12;//设置应用显示或者隐藏
-    APP_ORDER_MODEL = 13;//设置应用顺序
-    MOBILE_NOTIFY_CIRCULATION_MODEL = 14;//手机通知流转开关
-    NOTIFY_BROADCAST_MODEL = 15;// 手机通知播报开关
-    FIRMWARE = 16; //固件传输
-    FIRMWARE_RESP = 17;//固件传输返回值
-    FIRMWARE_INSTALL_COMMAND= 18;//固件安装命令
+    WEAR_DETECTION = 2;                //佩戴检测
+    SYSTEM_SOUND = 3;                  //系统音效
+    CONTROL_MUSIC = 4;                 //熄屏时控制音乐
+    GLASSES_OPERATION_GUIDE = 5;       //展示眼镜操作引导
+    SHOW_OPERATING_INSTRUCTIONS = 6;   //展示新手引导页面(无消息体)
+    CHANGE_GLASSES_NAME= 7;            //修改眼镜名称
+    LONG_PRESS_GO_KEY= 8;              //设置长按go键
+    AUTOMATICALLY_TURN_OFF_SCREEN = 9; //自动熄屏时间
+    SYSTEM_FONT_SIZE = 10;             //设置字体大小
+    SYSTEM_LANGUAGE = 11;              //设置系统语言
+    SYSTEM_TIME     = 12;              //设置系统时间(同步手机)
+    APP_SHOW_SETTING = 13;             //设置应用显示或者隐藏
+    APP_ORDER_MODEL = 14;              //设置应用顺序
+    MOBILE_NOTIFY_CIRCULATION_MODEL = 15;//手机通知流转开关
+    NOTIFY_BROADCAST_MODEL = 16;       // 手机通知播报开关
+    FIRMWARE = 17;                     //固件传输
+    FIRMWARE_RESP = 18;                //固件传输返回值
+    FIRMWARE_INSTALL_COMMAND= 19;      //固件安装命令
 }
 
 //消息主体
@@ -40,11 +41,12 @@ message GlassesSettings {
      AutomaticallyTurnOffScreen automaticallyTurnOffScreen = 5;
      SystemFontSize systemFontSize = 6;
      SystemLanguage systemLanguage = 7;
-     AppShowSetting appShowSetting = 8;
-     AppOrderModel appOrderModel = 9;
-     AppNotificationSettingModel appNotificationSettingModel = 10;
-     Firmware firmware = 11;
-     FirmwareResp firmwareResp  = 12;
+     SystemTime synchronize     = 8;  //同步手机时间
+     AppShowSetting appShowSetting = 9;
+     AppOrderModel appOrderModel = 10;
+     AppNotificationSettingModel appNotificationSettingModel = 11;
+     Firmware firmware = 12;
+     FirmwareResp firmwareResp  = 13;
     }
 }
 
@@ -103,4 +105,9 @@ message SystemFontSize {
 // 系统语言
 message SystemLanguage {
   uint32 language = 1;// 0,中文;1,繁体中文;2,英语;3,日语;4,韩语;5,语言1;6,语言2;7,语言3;8,语言4;9,语言5;10,语言6
+}
+
+// 同步时间
+message SystemTime {
+   int64 timestamp    = 4;   // 时间戳
 }
