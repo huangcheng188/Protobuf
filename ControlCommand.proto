@@ -78,14 +78,17 @@ enum CommandSetBind {
   BIND            = 1;                 //控制绑定
 }
 
+enum ControlCall{
+  ANSWER          = 0;             // 接听
+  HANGUP          = 1;             // 挂断
+  REGJECT         = 2;             // 拒接
+}
+
 message CommandControlCall {
   
   bytes phone_number = 1;            // 联系人
-  enum ControlCall{
-    ANSWER          = 2;             // 接听
-    HANGUP          = 3;             // 挂断
-    REGJECT         = 4;             // 拒接
-  }
+  ControlCall control_call = 2;
+  
 }
 
 message ControlCommand {
