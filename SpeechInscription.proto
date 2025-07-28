@@ -55,7 +55,7 @@ message DocumentUploadStateResp  {
 
 //开启提词
 message StartPromptReq {
-  uint32 promptDocumentId = 1; //提词id
+   int32 promptDocumentId = 1; //提词id
 }
 
 //通知app端初始化页面使用提词进度（发送开始提词命令后返回）
@@ -74,7 +74,7 @@ message UpdatePageTurningMode {
 }
 
 message PromptStateResp {
-   uint32 fileId = 1;    //文档id
+   int32 fileId = 1;    //文档id
    bytes fileName = 2; //文档名称
    bytes fileContentMd5 = 3;    //文档内容md5
    SpeechProgressSync speechProgressSync = 4;
