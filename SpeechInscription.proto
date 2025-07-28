@@ -11,10 +11,11 @@ enum SpeechInscriptionMessageType {
     PROMPT_COMMANDS_TYPE = 0;
     UPLOAD_PROMPT_DOCUMENT_REQ_TYPE = 1;
     DOCUMENT_UPLOAD_STATE_RESP= 2;
-    PROMPT_SHOW_RESP = 3;
-    UPDATE_PAGE_TURNING_MODE_TYPE = 4;
-    SPEECH_PROGRESS_SYNC = 5;
-    PROMPT_STATE_RESP = 6;
+    START_PROMPT_REQ = 3;
+    PROMPT_SHOW_RESP = 4;
+    UPDATE_PAGE_TURNING_MODE_TYPE = 5;
+    SPEECH_PROGRESS_SYNC = 6;
+    PROMPT_STATE_RESP = 7;
 }
 
 //消息主体
@@ -24,11 +25,12 @@ message SpeechInscription {
     {
         UpdatePromptDocumentReq uploadPromptDocument = 2;
         DocumentUploadStateResp documentUploadStateResp = 3;
-        PromptShowResp promptShowResp = 4;
-        SpeechProgressSync speechProgressSync = 5;
-        UpdatePageTurningMode updatePageTurningMode = 6;
-        PromptStateResp promptStateResp = 7;
-        PromptCommandType promptCommandType = 8;
+        StartPromptReq startPromptReq = 4;
+        PromptShowResp promptShowResp = 5;
+        SpeechProgressSync speechProgressSync = 6;
+        UpdatePageTurningMode updatePageTurningMode = 7;
+        PromptStateResp promptStateResp = 8;
+        PromptCommandType promptCommandType = 9;
     }
 }
 
@@ -51,6 +53,10 @@ message DocumentUploadStateResp  {
      bytes failedMessage = 2;  // 失败原因
 }
 
+//开启提词
+message StartPromptReq {
+  uint32 promptDocumentId = 1; //提词id
+}
 
 //通知app端初始化页面使用提词进度（发送开始提词命令后返回）
 message PromptShowResp {
