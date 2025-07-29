@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "GlassesSettings.proto";
+
+message DeviceVersion{
+  string version = 1;                     //版本号
+}
+
+message DeviceSn{
+  string sn = 2;                          //sn号
+}
+
+message DeviceWearDetection{
+  bool wear_detection = 4;                //佩戴检测开关
+}
+
+message DeviceBrightness{
+  uint32 brightness = 6;                  //亮度
+}
+
+message DeviceElectric{
+  uint32 electric = 7;                    //电量
+}
+
+message DeviceVolume{
+  uint32 volume = 8;                      //音量
+}
+
+message DeviceStatusReport
+{
+  oneof DeviceStatus
+  {
+    DeviceVersion        version = 1;                     //版本号
+    DeviceSn             sn = 2;                          //sn号
+    AutomaticallyTurnOffScreen timeout = 3;               //灭屏超时时间 
+    DeviceWearDetection  wear_detection = 4;              //佩戴检测开关
+    Language             language = 5;                    //系统语言
+    DeviceBrightness     brightness = 6;                  //亮度
+    DeviceElectric       electric = 7;                    //电量
+    DeviceVolume         volume = 8;                      //音量
+  }
+}
+
