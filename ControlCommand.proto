@@ -89,6 +89,7 @@ enum ControlCall{
   MERGE_CONFERENCE = 7;                  // 合并通话（三方会议）
   RELEASE_HELD_WAITING = 8;              // 挂断保持或等待通话
   IGNORE           = 9;                      // 忽略
+  THREE_WAY_REJECT_WAITING  = 10;            // 拒接等待来电
 }
 
 message CommandControlCall {
