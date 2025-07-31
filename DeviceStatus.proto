@@ -29,18 +29,31 @@ message DeviceVolume{
   uint32 volume = 8;                      //音量
 }
 
-message DeviceStatus
+enum DeviceStatusMessageType {
+  DEVICE_STATUS_UNKNOWN = 0;
+  DEVICE_STATUS_VERSION = 1;
+  DEVICE_STATUS_SN = 2;
+  DEVICE_STATUS_TIMEOUT = 3;
+  DEVICE_STATUS_WEAR_DETECTION = 4;
+  DEVICE_STATUS_LANGUAGE = 5;
+  DEVICE_STATUS_BRIGHTNESS = 6;
+  DEVICE_STATUS_ELECTRIC = 7;
+  DEVICE_STATUS_VOLUME = 8;
+}
+
+message DeviceStatusReport
 {
-  oneof Command
+  DeviceStatusMessageType msg_type = 1;
+  oneof DeviceStatus
   {
-       DeviceVersion        version = 1;                     //版本号
-       DeviceSn             sn = 2;                          //sn号
-       AutomaticallyTurnOffScreen timeout = 3;               //灭屏超时时间
-       DeviceWearDetection  wear_detection = 4;              //佩戴检测开关
-       Language             language = 5;                    //系统语言
-       DeviceBrightness     brightness = 6;                  //亮度
-       DeviceElectric       electric = 7;                    //电量
-       DeviceVolume         volume = 8;                      //音量
+    DeviceVersion        version = 2;                     //版本号
+    DeviceSn             sn = 3;                          //sn号
+    AutomaticallyTurnOffScreen timeout = 4;               //灭屏超时时间 
+    DeviceWearDetection  wear_detection = 5;              //佩戴检测开关
+    Language             language = 6;                    //系统语言
+    DeviceBrightness     brightness = 7;                  //亮度
+    DeviceElectric       electric = 8;                    //电量
+    DeviceVolume         volume = 9;                      //音量
   }
 }
 
