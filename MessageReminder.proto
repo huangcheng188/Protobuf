@@ -15,24 +15,30 @@ enum MessageReminderMessageType {
 enum CallType {
     OUTGOING = 0;                                // 去电
     INCOMING = 1;                                // 来电
-    MISSED   = 2;                                // 未接
-    IDLE     = 3；                               // 空闲            
-    CALL_ACTIVE_WITH_CALL_WAITING  = 4;              // 正在通话中，同时有另一路来电等待（用户可选择接听或拒接）
-    CALL_ACTIVE_WITH_CALL_HELD   = 5;                // 正在通话中，另一通话被保持。
-    CALL_WAITING_ONLY   = 6;                         // 仅有呼叫等待（主通话可能刚刚结束，纯等待）
-    MULTIPARTY_ACTIVE   = 7;                         // 多方通话已合并 (多方会议) 
-    MULTILINK_ACTIVE    = 8;                               // A 手机正在通话，B 手机空闲
-    MULTILINK_ACTIVE_WITH_CALL_WAITING = 9;                // A 手机正在通话，B 手机来电等待
-    MULTILINK_ACTIVE_WITH_CALL_HELD    = 10;               // A 手机正在通话，B 手机保持
-    MULTILINK_HELD_ONLY                = 11;               // 所有通话保持
+    REJECT   = 2;                                // 拒接
+    IDLE     = 3；                               // 空闲        
+    STATE_ACTIVE_CALL  = 4;                      // 正在通话中
+    STATE_TWC_CALL_WAITING = 5;                          // 三方通话：有通话进行中，另一个来电等待
+    STATE_TWC_CALL_ON_HELD = 6;                          // 三方通话：一个通话保留，另一个正在进行
+    STATE_ON_HELD_NO_ACTIVE = 7;                              // 只有一个保留（hold）通话，没有通话进行中
+}
+
+message UserList {
+    bytes phone_number_action   = 1;                   // 当前正在通话用户号码
+    bytes phone_number_unaction = 2;                   // 当前没有通话用户号码
+}
+
+message NameList {
+    bytes phone_name_action   = 1;                   // 当前正在通话用户名字
+    bytes phone_name_unaction = 2;                   // 当前没有通话用户名字
 }
 
 //电话通知信息
 message MobilePhoneNotif {
-    bytes contact_name = 1;
-    bytes phone_number = 2;
-    CallType type      = 3;   // 来电类型：来电、去电、未接
-    int64 timestamp    = 4;   // 时间戳
+    NameList contact_name = 1;      // 用户名字集
+    UserList user_list = 2;         // 用户号码集
+    CallType type      = 4;         // 来电类型：来电、去电、未接 ..
+    int64 timestamp    = 5;         // 时间戳
 }
 
 //消息主体

@@ -12,6 +12,7 @@ enum SuperRecordMessageType {
     SUPER_RECORD_ASR     = 1;        // ASR内容的传输
     SUPER_RECORD_ONLINE  = 2;        // app 连接眼镜时互相通信的类
     SUPER_RECORD_OFFLINE = 3;        // 眼镜断开 app 时记录的录音内容，等 app 再连接上眼镜时发送给 app 使用
+    SUPER_RECORD_SETTING = 4;        // 录音设置
 }
 
 // 消息主体
@@ -22,6 +23,7 @@ message SuperRecord {
         SuperRecordAsrContent        super_record_asr_content  = 3;  // ASR内容
         SuperRecordContent           online_content   = 4;  // APP识别的录音内容，文字包括时间戳，录音走另外的通道
         SuperRecordOffineContent     offline_content  = 5;  // 离线录音内容，音频文件和图片列表包括各自的时间戳
+        SuperRecordSetting           super_record_setting = 6;  // 录音设置
     }
 }
 
@@ -58,8 +60,22 @@ message SuperRecordOffineContent {
     int64                          create_time = 2;  // 创建录音的时间戳，代表几几年几月几日的时间，单位 ms，1000 代表 1 秒
 }
 
+message SuperRecordSetting {
+    repeated SuperRecordSettingInfo record_app_list  = 1; // app列表
+}
 // 录音文件信息类，包括了录音文件的 byte、时间戳和录音时长
 message SuperRecordAudioInfo {
     bytes  audio_data = 1;  // 音频数据
     int64  duration   = 2;  // 录音时长，单位 ms
+}
+message SuperRecordSettingInfo {
+    SuperRecordSettingApp  record_App = 1;  // app类型
+    bool   is_record = 2;  // 是否录音
+}
+
+enum SuperRecordSettingApp {
+    SUPERRE_RECORD_PHONE    = 0;  // 电话
+    SUPERRE_RECORD_WECHAT   = 1;  // 微信
+    SUPERRE_RECORD_FLYBOOK  = 2;  // 飞书
+    SUPERRE_RECORD_DINGDING = 3;  // 钉钉
 }
