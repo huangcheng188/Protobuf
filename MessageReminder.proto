@@ -13,9 +13,18 @@ enum MessageReminderMessageType {
 }
 
 enum CallType {
-    OUTGOING = 0; //去电
-    INCOMING = 1; //来电
-    MISSED = 2;   //未接
+    OUTGOING = 0;                                // 去电
+    INCOMING = 1;                                // 来电
+    MISSED   = 2;                                // 未接
+    IDLE     = 3；                               // 空闲            
+    CALL_ACTIVE_WITH_CALL_WAITING  = 4;              // 正在通话中，同时有另一路来电等待（用户可选择接听或拒接）
+    CALL_ACTIVE_WITH_CALL_HELD   = 5;                // 正在通话中，另一通话被保持。
+    CALL_WAITING_ONLY   = 6;                         // 仅有呼叫等待（主通话可能刚刚结束，纯等待）
+    MULTIPARTY_ACTIVE   = 7;                         // 多方通话已合并 (多方会议) 
+    MULTILINK_ACTIVE    = 8;                               // A 手机正在通话，B 手机空闲
+    MULTILINK_ACTIVE_WITH_CALL_WAITING = 9;                // A 手机正在通话，B 手机来电等待
+    MULTILINK_ACTIVE_WITH_CALL_HELD    = 10;               // A 手机正在通话，B 手机保持
+    MULTILINK_HELD_ONLY                = 11;               // 所有通话保持
 }
 
 //电话通知信息
