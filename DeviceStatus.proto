@@ -41,7 +41,7 @@ enum DeviceStatusMessageType {
   DEVICE_STATUS_VOLUME = 8;
 }
 
-message DeviceStatusReport
+message DeviceStatus
 {
   DeviceStatusMessageType msg_type = 1;
   oneof DeviceStatus
