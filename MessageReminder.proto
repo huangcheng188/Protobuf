@@ -13,17 +13,32 @@ enum MessageReminderMessageType {
 }
 
 enum CallType {
-    OUTGOING = 0; //去电
-    INCOMING = 1; //来电
-    MISSED = 2;   //未接
+    OUTGOING = 0;                                // 去电
+    INCOMING = 1;                                // 来电
+    REJECT   = 2;                                // 拒接
+    IDLE     = 3；                               // 空闲        
+    STATE_ACTIVE_CALL  = 4;                      // 正在通话中
+    STATE_TWC_CALL_WAITING = 5;                          // 三方通话：有通话进行中，另一个来电等待
+    STATE_TWC_CALL_ON_HELD = 6;                          // 三方通话：一个通话保留，另一个正在进行
+    STATE_ON_HELD_NO_ACTIVE = 7;                              // 只有一个保留（hold）通话，没有通话进行中
+}
+
+message UserList {
+    bytes phone_number_action   = 1;                   // 当前正在通话用户号码
+    bytes phone_number_unaction = 2;                   // 当前没有通话用户号码
+}
+
+message NameList {
+    bytes phone_name_action   = 1;                   // 当前正在通话用户名字
+    bytes phone_name_unaction = 2;                   // 当前没有通话用户名字
 }
 
 //电话通知信息
 message MobilePhoneNotif {
-    bytes contact_name = 1;
-    bytes phone_number = 2;
-    CallType type      = 3;   // 来电类型：来电、去电、未接
-    int64 timestamp    = 4;   // 时间戳
+    NameList contact_name = 1;      // 用户名字集
+    UserList user_list = 2;         // 用户号码集
+    CallType type      = 4;         // 来电类型：来电、去电、未接 ..
+    int64 timestamp    = 5;         // 时间戳
 }
 
 //消息主体
@@ -39,7 +54,7 @@ message MessageReminder {
 //三方应用通知信息
 message AppNotificationInfo{
    bytes packageName = 1;
-   uint32 type = 1;
+   uint32 type = 2;
    //bytes labelName =2;
    bytes title = 3;
    bytes content = 4;

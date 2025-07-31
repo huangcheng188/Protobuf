@@ -11,10 +11,11 @@ enum SpeechInscriptionMessageType {
     PROMPT_COMMANDS_TYPE = 0;
     UPLOAD_PROMPT_DOCUMENT_REQ_TYPE = 1;
     DOCUMENT_UPLOAD_STATE_RESP= 2;
-    PROMPT_SHOW_RESP = 3;
-    UPDATE_PAGE_TURNING_MODE_TYPE = 4;
-    SPEECH_PROGRESS_SYNC = 5;
-    PROMPT_STATE_RESP = 6;
+    START_PROMPT_REQ = 3;
+    PROMPT_SHOW_RESP = 4;
+    UPDATE_PAGE_TURNING_MODE_TYPE = 5;
+    SPEECH_PROGRESS_SYNC = 6;
+    PROMPT_STATE_RESP = 7;
 }
 
 //消息主体
@@ -24,18 +25,19 @@ message SpeechInscription {
     {
         UpdatePromptDocumentReq uploadPromptDocument = 2;
         DocumentUploadStateResp documentUploadStateResp = 3;
-        PromptShowResp promptShowResp = 4;
-        SpeechProgressSync speechProgressSync = 5;
-        UpdatePageTurningMode updatePageTurningMode = 6;
-        PromptStateResp promptStateResp = 7;
-        PromptCommandType promptCommandType = 8;
+        StartPromptReq startPromptReq = 4;
+        PromptShowResp promptShowResp = 5;
+        SpeechProgressSync speechProgressSync = 6;
+        UpdatePageTurningMode updatePageTurningMode = 7;
+        PromptStateResp promptStateResp = 8;
+        PromptCommandType promptCommandType = 9;
     }
 }
 
 enum PromptCommandType {
     PREVIOUS_PAGE = 0;    // 上翻页
     NEXT_PAGE = 1;        // 下翻页
-    REQUEST_PROMPT_STATE = 2;      // app发送该请求眼镜端提词状态；眼镜端返回正在提词的PromptStateResp信息；如果没提词，不用返回
+    REQUEST_PROMPT_STATE = 2;      //  蓝牙断开重连时，app发送该请求眼镜端提词状态；眼镜端返回正在提词的PromptStateResp信息；如果没提词，不用返回
 }
 
 //更新眼镜端提词文档
@@ -51,10 +53,14 @@ message DocumentUploadStateResp  {
      bytes failedMessage = 2;  // 失败原因
 }
 
-//眼镜端返回提词进度（发送开始提词命令后返回）
+//开启提词
+message StartPromptReq {
+   uint32 promptDocumentId = 1; //提词id
+}
+
+//通知app端初始化页面使用提词进度（发送开始提词命令后返回）
 message PromptShowResp {
-     repeated uint32 rowNums = 1;  //每行字数列表{10,12,11,...}
-     SpeechProgressSync speechProgressSync = 2;  //进度
+    SpeechProgressSync speechProgressSync = 1;  //进度
 }
 
 //提词进度调节（双端使用）
@@ -71,5 +77,5 @@ message PromptStateResp {
    uint32 fileId = 1;    //文档id
    bytes fileName = 2; //文档名称
    bytes fileContentMd5 = 3;    //文档内容md5
-   PromptShowResp promptShowResp = 4;
+   SpeechProgressSync speechProgressSync = 4;
 }

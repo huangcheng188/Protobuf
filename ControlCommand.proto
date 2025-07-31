@@ -78,10 +78,25 @@ enum CommandSetBind {
   BIND            = 1;                 //控制绑定
 }
 
-enum CommandControlCall {
+enum ControlCall{
   ANSWER          = 0;             // 接听
   HANGUP          = 1;             // 挂断
   REGJECT         = 2;             // 拒接
+  REDIAL_LAST_NUMBER  = 3;            // 重拨
+  DIAL_NUMBER         = 4;            // 拨号
+  HOLD_ACTIVE_ACCEPT_WAITING = 5;        // 保持当前通话并接听等待来电
+  SWAP_ACTIVE_HELD = 6;                  // 切换保持和当前通话
+  MERGE_CONFERENCE = 7;                  // 合并通话（三方会议）
+  RELEASE_HELD_WAITING = 8;              // 挂断保持或等待通话
+  IGNORE           = 9;                      // 忽略
+  THREE_WAY_REJECT_WAITING  = 10;            // 拒接等待来电
+}
+
+message CommandControlCall {
+  
+  bytes phone_number = 1;            // 联系人
+  ControlCall control_call = 2;
+  
 }
 
 message ControlCommand {

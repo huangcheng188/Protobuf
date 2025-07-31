@@ -101,11 +101,25 @@ message SystemFontSize {
      uint32 fontSize = 1;// 0,小;1,标准;2,大;3,最大
 }
 
+enum Language {
+  LANG_ZH_CN = 0;   // 简体中文
+  LANG_ZH_TW = 1;   // 繁體中文
+  LANG_EN_US = 2;   // 英语
+  LANG_JA_JP = 3;   // 日语
+  LANG_KO_KR = 4;   // 韩语
+  LANG_ES_ES = 5;   // 西班牙语
+  LANG_PT_BR = 6;   // 葡萄牙语
+  LANG_FR_FR = 7;   // 法语
+  LANG_DE_DE = 8;   // 德语
+  LANG_IT_IT = 9;   // 意大利语
+  LANG_TH_TH = 10;  // 泰语
+}
 
 // 系统语言
 message SystemLanguage {
-  uint32 language = 1;// 0,中文;1,繁体中文;2,英语;3,日语;4,韩语;5,语言1;6,语言2;7,语言3;8,语言4;9,语言5;10,语言6
+  Language language = 1; //语言
 }
+
 
 // 同步时间
 message SystemTime {
