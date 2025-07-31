@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+//option java_package = "com.inmo.app.module_go3device";// 替换为你的包名
+//option java_outer_classname = "DeviceStatusProto";// 生成的外部类
+
 import "GlassesSettings.proto";
 
 message DeviceVersion{
@@ -26,18 +29,18 @@ message DeviceVolume{
   uint32 volume = 8;                      //音量
 }
 
-message DeviceStatusReport
+message DeviceStatus
 {
-  oneof DeviceStatus
+  oneof Command
   {
-    DeviceVersion        version = 1;                     //版本号
-    DeviceSn             sn = 2;                          //sn号
-    AutomaticallyTurnOffScreen timeout = 3;               //灭屏超时时间 
-    DeviceWearDetection  wear_detection = 4;              //佩戴检测开关
-    Language             language = 5;                    //系统语言
-    DeviceBrightness     brightness = 6;                  //亮度
-    DeviceElectric       electric = 7;                    //电量
-    DeviceVolume         volume = 8;                      //音量
+       DeviceVersion        version = 1;                     //版本号
+       DeviceSn             sn = 2;                          //sn号
+       AutomaticallyTurnOffScreen timeout = 3;               //灭屏超时时间
+       DeviceWearDetection  wear_detection = 4;              //佩戴检测开关
+       Language             language = 5;                    //系统语言
+       DeviceBrightness     brightness = 6;                  //亮度
+       DeviceElectric       electric = 7;                    //电量
+       DeviceVolume         volume = 8;                      //音量
   }
 }
 
