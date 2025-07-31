@@ -3,11 +3,11 @@ syntax = "proto3";
 import "GlassesSettings.proto";
 
 message DeviceVersion{
-  string version = 1;                     //版本号
+  bytes version = 1;                     //版本号
 }
 
 message DeviceSn{
-  string sn = 2;                          //sn号
+  bytes sn = 2;                          //sn号
 }
 
 message DeviceWearDetection{
