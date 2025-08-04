@@ -12,6 +12,7 @@ enum FastSpeedNoteMessageType {
     FastSpeedNote_ASR     = 1;        // ASR内容的传输
     FastSpeedNote_ONLINE  = 2;        // app 连接眼镜时互相通信的类
     FastSpeedNote_OFFLINE = 3;        // 眼镜断开 app 时记录的速记内容，等 app 再连接上眼镜时发送给 app 使用
+    FastSpeedNote_EXCEPTION = 4;      // 速记异常信息
 }
 
 // 消息主体
@@ -22,6 +23,7 @@ message FastSpeedNote {
         FastSpeedNoteAsrContent         speed_note_asr_content  = 3;  // ASR内容
         FastSpeedNoteContent            online_content   = 4;  // 速记内容，文字和图片包括时间戳，录音走另外的通道
         FastSpeedNoteOfflineContent     offline_content  = 5;  // 离线速记内容，音频文件和图片列表包括各自的时间戳
+        FastSpeedNoteException          fast_speed_note_exception = 6;  // 异常信息
     }
 }
 
@@ -33,6 +35,12 @@ enum FastSpeedNoteCommand {
     NO_MEMORY_STOP_SPEEDNOTE    = 3;  // 内存不足停止录音
     START_SPEEDNOTE_OFFLINE     = 4;  // 开始发送离线速记，可能有多条，现在写的是一次传一个
     STOP_SPEEDNOTE_OFFLINE      = 5;  // 停止速记
+}
+
+// 速记异常信息
+message FastSpeedNoteException {
+    int64  fast_speed_note_exception_code    = 1;   // 异常code  1001 代表正在运行暂不能启动
+    bytes  fast_speed_note_exception_content = 2;  // 异常信息
 }
 
 //ASR内容

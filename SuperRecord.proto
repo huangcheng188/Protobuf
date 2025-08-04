@@ -5,14 +5,14 @@ option java_package = "com.inmo.app.module_go3device";
 
 // 生成的外部类名
 option java_outer_classname = "SuperRecordProto";
-
 // 消息主体类型
 enum SuperRecordMessageType {
-    SUPER_RECORD_COMMAND = 0;        // 录音启动和退出等控制命令
-    SUPER_RECORD_ASR     = 1;        // ASR内容的传输
-    SUPER_RECORD_ONLINE  = 2;        // app 连接眼镜时互相通信的类
-    SUPER_RECORD_OFFLINE = 3;        // 眼镜断开 app 时记录的录音内容，等 app 再连接上眼镜时发送给 app 使用
-    SUPER_RECORD_SETTING = 4;        // 录音设置
+    SUPER_RECORD_COMMAND   = 0;        // 录音启动和退出等控制命令
+    SUPER_RECORD_ASR       = 1;        // ASR内容的传输
+    SUPER_RECORD_ONLINE    = 2;        // app 连接眼镜时互相通信的类
+    SUPER_RECORD_OFFLINE   = 3;        // 眼镜断开 app 时记录的录音内容，等 app 再连接上眼镜时发送给 app 使用
+    SUPER_RECORD_SETTING   = 4;        // 录音设置
+    SUPER_RECORD_EXCEPTION = 5;        // 异常信息
 }
 
 // 消息主体
@@ -24,7 +24,14 @@ message SuperRecord {
         SuperRecordContent           online_content   = 4;  // APP识别的录音内容，文字包括时间戳，录音走另外的通道
         SuperRecordOffineContent     offline_content  = 5;  // 离线录音内容，音频文件和图片列表包括各自的时间戳
         SuperRecordSetting           super_record_setting = 6;  // 录音设置
+        SuperRecordException         super_record_exception = 7;  // 异常信息
     }
+}
+
+// 录音异常信息
+message SuperRecordException {
+    int64  super_record_exception_code   = 1;   // 异常code 1001 代表正在运行暂不能启动
+    bytes  super_record_exception_content = 2;  // 异常信息
 }
 
 // 录音启动和退出等控制命令
@@ -36,7 +43,7 @@ enum SuperRecordCommand {
     PAUSE_SUPERRE_RECORD         = 4;  // 暂停录音
     RESUME_SUPERRE_RECORD        = 5;  // 继续录音
     START_SUPERRE_RECORD_OFFLINE = 6;  // 开始发送离线录音，可能有多条，现在写的是一次传一个
-    STOP_SUPERRE_RECORD_OFFLINE   = 7;  // 停止录音
+    STOP_SUPERRE_RECORD_OFFLINE  = 7;  // 停止录音
 }
 
 //ASR内容
@@ -61,7 +68,7 @@ message SuperRecordOffineContent {
 }
 
 message SuperRecordSetting {
-    repeated SuperRecordSettingInfo record_app_list  = 1; // app列表
+    repeated SuperRecordSettingInfo record_app_list  = 1;
 }
 // 录音文件信息类，包括了录音文件的 byte、时间戳和录音时长
 message SuperRecordAudioInfo {
@@ -69,9 +76,10 @@ message SuperRecordAudioInfo {
     int64  duration   = 2;  // 录音时长，单位 ms
 }
 message SuperRecordSettingInfo {
-    SuperRecordSettingApp  record_App = 1;  // app类型
+    SuperRecordSettingApp  record_App = 1;  //app类型
     bool   is_record = 2;  // 是否录音
 }
+
 
 enum SuperRecordSettingApp {
     SUPERRE_RECORD_PHONE    = 0;  // 电话
