@@ -66,6 +66,7 @@ message PromptShowResp {
 //提词进度调节（双端使用）
 message SpeechProgressSync {
     uint32 line = 1;      //更新提词进度 展示到第几行
+    float  progress = 2;  //进度
 }
 
 //更新翻页模式

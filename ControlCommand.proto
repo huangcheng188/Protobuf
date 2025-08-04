@@ -20,6 +20,7 @@ enum CommandType {
   IS_OPEN_WEAR    = 15;     // 佩戴检测功能
   BREAK_BIND      = 16;     // 控制绑定连接
   MANAGE_CALL     = 17;     // 控制电话
+  SCREENSHOT     = 18;     // 截屏
 }
 
 enum CommandMode {
