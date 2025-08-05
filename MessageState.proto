@@ -15,19 +15,42 @@ message MessageState{
   }
 }
 
-//wifi状态同步
-message FileInfo {
-  uint32 file_type = 1;   		//0:图片   1:视频  2:视频的imu 3:视频的音频  4:超能录音的音频
-  uint64 create_time = 2;       // 文件创建时间（时间戳，单位：秒）
-  uint64 file_size = 3;       // 文件字节大小
+
+//wifi同步文件步骤
+// 1 app先调UnsyncedFileListRequest发送请求给眼镜
+// 2 眼镜返回WifiData 里面包含文件列表FileInfo
+// 3 app拿着wifidata的ssid pwd开启wifi  开启socket
+// 4 app拿着FileInfo中的文件路径 通过socket下载对应的文件
+
+// 查询未同步的文件列表
+message UnsyncedFileListRequest {
+  FileModuleType module_type = 1; // 模块类型
 }
 
+// 文件模块类型
+enum FileModuleType {
+  QUERY_IMAGE_DATA        = 0;           // 查询图片数据
+  QUERY_VIDEO_DATA        = 1;           // 查询视频数据
+  QUERY_SPEED_NOTE_DATA   = 2;           // 查询速记数据
+  QUERY_SUPER_RECORD_DATA = 3;           // 查询超能录音数据
+  QUERY_ALL_DATA          = 4;           // 查询全部数据
+}
+
+// 眼镜返回文件列表
 message WifiData {
-  string ssid = 1;              // WiFi名称
-  string pwd = 2;               // WiFi密码
-  uint32 picture_file_count = 3;        // 需要传输的图片文件个数
-  uint32 video_file_count = 4;        // 需要传输的视频文件个数
-  repeated FileInfo files = 5;  // 文件列表
+  string   ssid             = 1;  // WiFi名称
+  string   pwd              = 2;  // WiFi密码
+  uint32   total_count      = 3;  // 总个数
+  repeated FileInfo files   = 4;  // 文件列表
+}
+
+// 文件信息
+message FileInfo {
+  FileModuleType file_module_type = 1;  // 文件所属的模块类型
+  uint32         file_type        = 2;  // 0:图片  1:视频  2:视频的imu 3:opus音频
+  string         file_name        = 3;  // 文件名    xxx.jpg   xxx.opus
+  string         file_path        = 4;  // 文件路径  /sdcard/xxx.jpg /sdcard/xxx.opus
+  uint64         file_size        = 5;  // 文件字节大小
 }
 
 //蓝牙状态同步
