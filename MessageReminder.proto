@@ -16,7 +16,7 @@ enum CallType {
     OUTGOING = 0;                                // 去电
     INCOMING = 1;                                // 来电
     REJECT   = 2;                                // 拒接
-    IDLE     = 3；                               // 空闲        
+    IDLE     = 3;                               // 空闲        
     STATE_ACTIVE_CALL  = 4;                      // 正在通话中
     STATE_TWC_CALL_WAITING = 5;                          // 三方通话：有通话进行中，另一个来电等待
     STATE_TWC_CALL_ON_HELD = 6;                          // 三方通话：一个通话保留，另一个正在进行
