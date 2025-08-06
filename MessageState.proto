@@ -12,6 +12,7 @@ message MessageState{
   oneof Status {
     BLE_BT_Status blue_tooch = 3;
     WifiData      wifi_data  = 4;
+    WifiControl   wifi_control  = 5;
   }
 }
 
@@ -42,6 +43,16 @@ message WifiData {
   string   pwd              = 2;  // WiFi密码
   uint32   total_count      = 3;  // 总个数
   repeated FileInfo files   = 4;  // 文件列表
+}
+
+// 手机操控眼镜wifi状态
+message WifiControl{
+   WifiStatus  wifi_status = 1;
+}
+
+enum WifiStatus {
+    WIFI_OPEN_STATUS = 0;            //打开wifi
+    WIFI_CLOSE_STATUS = 1;           //关闭wifi
 }
 
 // 文件信息
