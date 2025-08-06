@@ -13,6 +13,7 @@ message MessageState{
     BLE_BT_Status blue_tooch = 3;
     WifiData      wifi_data  = 4;
     WifiControl   wifi_control  = 5;
+    UnsyncedFileListRequest unsyncedFileListRequest = 6; //Synchronous 为QUERY_SYNCH时 使用
   }
 }
 
@@ -97,4 +98,5 @@ enum Synchronous {
   STOP_SYNCH    = 1;
   RESTART_SYNCH = 2;
   NOT_PERFORM   = 3;
+  QUERY_SYNCH   = 4;
 }
