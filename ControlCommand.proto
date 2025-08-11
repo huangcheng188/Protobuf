@@ -33,6 +33,7 @@ enum CommanTouchWayType {
   LoogPass =   0;           // 长按模式
   Click    =   1;           // 点击模式
   Drag     =   2;           // 拖动模式
+  DoubleClick =   3;        // 双击
 }
 
 enum CommanTouchDirection {
