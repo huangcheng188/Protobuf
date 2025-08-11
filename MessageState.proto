@@ -91,6 +91,7 @@ message BLE_BT_Status {
   bool Phone_bind  = 2;                //手机已绑定
   bool link_type  = 3;                 //连接状态
   StatusBind  statustype = 4;          //绑定状态
+  bytes phone_name = 5;                //手机名称
 }
 
 enum Synchronous {
