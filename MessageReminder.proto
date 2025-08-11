@@ -10,6 +10,7 @@ syntax = "proto3";
 enum MessageReminderMessageType {
     APP_NOTIFICATION_INFO= 0; // 三方应用通知消息
     USER_CALL_INFO       = 1; // 电话通知
+    USER_CALL_SEARCH_NAME       = 2; // 查询电话用户名称
 }
 
 enum CallType {
@@ -41,6 +42,14 @@ message MobilePhoneNotif {
     int64 timestamp    = 5;         // 时间戳
 }
 
+
+//电话通知信息
+message MobilePhoneQrName {
+    bytes number = 1;      // 用户名字集
+    bytes name = 2;         // 用户号码集
+}
+
+
 //消息主体
 message MessageReminder {
     MessageReminderMessageType msg_type = 1;
@@ -48,6 +57,7 @@ message MessageReminder {
     {
      AppNotificationInfo app_notification_info = 2;
      MobilePhoneNotif    mobile_phone_notif  = 3;   //电话通知
+     MobilePhoneQrName    searchName_phone_notif  = 4;   //电话通知
     }
 }
 
