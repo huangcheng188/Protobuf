@@ -45,6 +45,8 @@ message TranslationTextContent {
 enum TranslationMessageType {
     TRANSLATION_SETTING = 0;        //设置数据同步
     TRANSLATION_TEXT_CONTENT = 1;  //翻译文本内容传输
+    TRANSLATION_PAUSE = 2;          //翻译暂停
+    TRANSLATION_RESUME = 3;          //翻译继续
 }
 
 //消息主体
