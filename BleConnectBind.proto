@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message BleConnectBind {
+  BleConnectBindType msg_type = 1;
+  bytes userAccount = 2;                  //用户手机号
+  bool isBackToLink = 3;                  //是否进行回连
+}
+
+enum BleConnectBindType {
+  BLECONNECT_QUERY_BIND_STATE = 0;        //查询眼镜状态
+  BLECONNECT_BACK_LINK = 1;               //回连
+  BLECONNECT_BIND_USERDATA = 2;           //绑定账号信息同步
+}
