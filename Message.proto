@@ -22,6 +22,7 @@ import "RingSettings.proto";
 import "MessageReminder.proto";
 import "ControlResponse.proto";
 import "DeviceStatus.proto";
+import "BleConnectBind.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -47,5 +48,6 @@ oneof Data {
     TP_Command touch = 24;
     RingSettings ringSettings = 25;
     ControlResponse controlResponse = 26;
+    BleConnectBind bleConnectBind = 27;
     }
 }
