@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message BleConnectBind {
   BleConnectBindType msg_type = 1;
-  bytes userAccount = 2;                  //用户手机号
+  bytes userAccount = 2;                  //用户唯一id
   bool isBackToLink = 3;                  //是否进行回连
 }
 
