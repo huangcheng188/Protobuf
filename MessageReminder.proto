@@ -47,6 +47,7 @@ message MobilePhoneNotif {
 message MobilePhoneQrName {
     bytes number = 1;      // 用户名字集
     bytes name = 2;         // 用户号码集
+    CallType type      = 3;         // 来电类型：来电、去电、未接 ..
 }
 
 

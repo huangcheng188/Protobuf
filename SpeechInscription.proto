@@ -37,7 +37,7 @@ message SpeechInscription {
 enum PromptCommandType {
     PREVIOUS_PAGE = 0;    // 上翻页
     NEXT_PAGE = 1;        // 下翻页
-    REQUEST_PROMPT_STATE = 2;      //  蓝牙断开重连时，app发送该请求眼镜端提词状态；眼镜端返回正在提词的PromptStateResp信息；如果没提词，不用返回
+    REQUEST_PROMPT_STATE = 2;      //  蓝牙连接成功时，app发送该请求眼镜端提词状态；眼镜端返回正在提词的PromptStateResp信息；如果没提词，不用返回
 }
 
 //更新眼镜端提词文档
@@ -55,7 +55,7 @@ message DocumentUploadStateResp  {
 
 //开启提词
 message StartPromptReq {
-   uint32 promptDocumentId = 1; //提词id
+    bool isPromptDefault = 1;    //是否提词默认文档  0：否；1：是
 }
 
 //通知app端初始化页面使用提词进度（发送开始提词命令后返回）
@@ -75,7 +75,7 @@ message UpdatePageTurningMode {
 }
 
 message PromptStateResp {
-   uint32 fileId = 1;    //文档id
+   bool isPromptDefault = 1;    //是否提词默认文档  0：否；1：是
    bytes fileName = 2; //文档名称
    bytes fileContentMd5 = 3;    //文档内容md5
    SpeechProgressSync speechProgressSync = 4;
