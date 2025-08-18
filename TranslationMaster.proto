@@ -41,12 +41,17 @@ message TranslationTextContent {
     bool isFinished = 4;
 }
 
+message TranslationError {
+    uint32 error_code = 1;
+}
+
 //消息主体类型
 enum TranslationMessageType {
     TRANSLATION_SETTING = 0;        //设置数据同步
     TRANSLATION_TEXT_CONTENT = 1;  //翻译文本内容传输
     TRANSLATION_PAUSE = 2;          //翻译暂停
     TRANSLATION_RESUME = 3;          //翻译继续
+    TRANSLATION_ERROR = 4;          //翻译出错
 }
 
 //消息主体
@@ -56,5 +61,6 @@ message TranslationMaster {
     {
         TranslationSetting setting = 2;
         TranslationTextContent text_content = 3;
+        TranslationError translation_error = 4;
     }
 }
