@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+message PayAssistant {
+  PayAssistantMessageType msg_type = 1;
+
+  //由glass发起的定义为act,有手机发起的请求定义为cmd
+  oneof message_data {
+    PayAssistantActionReq actReq = 2;      // act请求，glass填充
+    PayAssistantActionRsp actRsp = 3;      // act应答，手机填充
+    PayAssistantCmdReq  cmdReq = 4;        // cmd请求，手机填充
+    PayAssistantCmdRsp  cmdRsp = 5;        // cmd应答，galss填充
+  }
+}
+
+enum PayAssistantMessageType {
+  ACT_REQ = 0;        //act请求
+  ACT_RSP = 1;        //act应答
+  CMD_REQ = 2;        //cmd请求
+  CMD_RSP = 3;        //cmd应答
+}
+
+// act 类型，glass端蚂蚁sdk填充的裸数据
+message PayAssistantActionReq {
+  bytes reqDate = 1;                //绑定的用户唯一ID，未绑定时为空
+}
+
+// act 类型，手机端蚂蚁sdk填充的裸数据
+message PayAssistantActionRsp {
+  bytes rspData = 1;               //错误信息，成功时为空
+}
+
+
+// cmd 类型，手机端蚂蚁sdk填充的裸数据
+message PayAssistantCmdReq {
+  bytes reqDate = 1;                //绑定的用户唯一ID，未绑定时为空
+}
+
+// cmd 类型，glass端蚂蚁sdk填充的裸数据
+message PayAssistantCmdRsp {
+  bytes rspData = 1;               //错误信息，成功时为空
+}

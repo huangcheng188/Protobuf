@@ -4,10 +4,40 @@ message BleConnectBind {
   BleConnectBindType msg_type = 1;
   bytes userAccount = 2;                  //用户唯一id
   bool isBackToLink = 3;                  //是否进行回连
+  
+  // 眼镜返回给手机的状态信息
+  oneof response_data {
+    BleBindStatusResponse bind_status = 4;      //绑定状态响应
+    BleUnbindResponse unbind_response = 5;      //未绑定回复
+    BleReconnectResponse reconnect_response = 6; //回连状态响应
+  }
+}
+
+// 眼镜返回给手机的绑定状态响应
+message BleBindStatusResponse {
+  bool is_bound = 1;                      //是否已绑定
+  bytes bound_user_id = 2;                //绑定的用户唯一ID，未绑定时为空
+ // string bound_account_info = 3;          //绑定的账号信息（可选，如用户名等）
+}
+
+// 眼镜返回给手机的未绑定操作响应
+message BleUnbindResponse {
+  bool success = 1;                       //解绑是否成功
+  string error_message = 2;               //错误信息，成功时为空
+}
+
+// 眼镜返回给手机的回连状态响应
+message BleReconnectResponse {
+  bool success = 1;                       //回连是否成功
+  string error_message = 2;               //错误信息，成功时为空
 }
 
 enum BleConnectBindType {
   BLECONNECT_QUERY_BIND_STATE = 0;        //查询眼镜状态
   BLECONNECT_BACK_LINK = 1;               //回连
   BLECONNECT_BIND_USERDATA = 2;           //绑定账号信息同步
+  BLECONNECT_BIND_STATUS_RESPONSE = 3;    //绑定状态响应
+  BLECONNECT_UNBIND_RESPONSE = 4;         //未绑定回复
+  BLECONNECT_RECONNECT_RESPONSE = 5;      //回连状态响应
+  BLECONNECT_UNBIND = 6;     //解绑
 }
