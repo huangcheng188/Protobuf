@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+// OTA 开始请求
+message OtaStartRequest {
+  bytes desired_version = 1;  // 升级的版本号
+  uint32 total_size = 2;      // 固件总大小
+}
+
+// OTA 开始响应
+message OtaStartResponse {
+  bool allowed = 1;           // 是否允许传输
+}
+
+// OTA 数据传输
+message OtaDataPacket {
+  uint32 data_id = 1;         // 数据 id
+  uint32 data_offset = 2;     // 数据在整个文件中的偏移
+  uint32 data_size = 3;       // 数据大小
+  bytes data = 4;             // 实际数据
+}
+
+// OTA 数据响应
+message OtaDataAck {
+  uint32 data_id = 1;         // 数据 id
+  bool success = 2;           // 是否写入成功
+}
+
+// OTA 结束通知
+message OtaComplete {
+  bool success = 1;            // 整个升级过程是否成功
+  bytes version_installed = 2; // 实际安装的版本
+}
+
+enum OtaMessageType {
+  OTA_MSG_UNKNOWN = 0;
+  OTA_MSG_VERSION_INFO = 1;
+  OTA_MSG_START_REQUEST = 2;
+  OTA_MSG_START_RESPONSE = 3;
+  OTA_MSG_DATA_PACKET = 4;
+  OTA_MSG_DATA_ACK = 5;
+  OTA_MSG_COMPLETE = 6;
+}
+
+message OtaMessage {
+  OtaMessageType msg_type = 1;
+  oneof Payload {
+    OtaStartRequest  start_request = 2;
+    OtaStartResponse start_response = 3;
+    OtaDataPacket    data_packet = 4;
+    OtaDataAck       data_ack = 5;
+    OtaComplete      complete = 6;
+  }
+}

@@ -24,6 +24,6 @@ enum MessageType {
     GLASSES_STATE    = 20;      // 眼镜状态同步
     RING_SETTINGS    = 22;      // 戒指设置
     CONTROL_RESPON   = 23;      // 指令响应 获取sn值
-    BLE_CONNECT_BIND   = 24;            // ble绑定回连
-    PAY_ASSISTANT   = 25;            // 支付助手
+    BLE_CONNECT_BIND   = 24;    // ble绑定回连
+    PAY_ASSISTANT   = 25;       // 支付助手
 }
