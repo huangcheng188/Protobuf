@@ -24,6 +24,7 @@ import "ControlResponse.proto";
 import "DeviceStatus.proto";
 import "BleConnectBind.proto";
 import "PayAssistant.proto";
+import "SwitchApplicationResponse.proto";
 
 message Message {
   uint32 version = 1;  // 协议版本号
@@ -51,5 +52,6 @@ oneof Data {
     ControlResponse controlResponse = 26;
     BleConnectBind bleConnectBind = 27;
     PayAssistant payAssistant = 28;
+    SwitchApplicationResponse switchAppResponse = 29;
     }
 }

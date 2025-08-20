@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+enum ApplicationResponseType {
+    SWITCHPP_TRANSLATION_MASTER_SIMULTANEOUS = 0;       // 同传翻译
+    SWITCHPP_TRANSLATION_MASTER_DIALOGUE = 1;           // 对话翻译
+    SWITCHPP_SPEECH_INSCRIPTION = 2;                    // 演讲题词
+    SWITCHPP_SOUND_RECORD = 3;                          // 超能录音
+    SWITCHPP_AI_ASSISTANT = 4;                          // AI助手
+    SWITCHPP_CONVERSATION_RECORD = 5;                   // 轻语速记
+    SWITCHPP_AR_FACE_RECOGNITION = 6;                   // AR识人
+    SWITCHPP_IMG_MANAGER = 7;                           // 图像和相册管理
+    SWITCHPP_VOICE_SUBTITLE = 8;                        / 语音字幕
+}
+
+message SwitchApplicationResponse {
+    ApplicationResponseType response_type = 1;
+}
