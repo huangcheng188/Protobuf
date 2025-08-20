@@ -10,8 +10,9 @@ message AudioHeader {
 }
 
 message AudioData {
-  AudioHeader header = 1;  // 音频录音头部数据
-  uint64 timestamp = 2;    // Unix时间戳（毫秒）
-  uint32 data_length = 3;  // 数据长度
-  bytes opus_data = 4;     // OPUS编码数据
+  AudioHeader header = 1;             // 音频录音头部数据
+  uint64 timestamp = 2;               // Unix时间戳（毫秒）
+  uint32 data_length = 3;             // 数据总长度
+  repeated uint32 frame_lengths = 4;  // 每个帧的长度（单位：字节）
+  bytes opus_data = 5;                // OPUS编码数据
 }
