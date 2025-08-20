@@ -2,15 +2,15 @@ syntax = "proto3";
 
 //对应的启动模块的类型
 enum ApplicationResponseType {
-    SWITCHPP_TRANSLATION_MASTER_SIMULTANEOUS = 0;       // 同传翻译
-    SWITCHPP_TRANSLATION_MASTER_DIALOGUE = 1;           // 对话翻译
-    SWITCHPP_SPEECH_INSCRIPTION = 2;                    // 演讲题词
-    SWITCHPP_SOUND_RECORD = 3;                          // 超能录音
-    SWITCHPP_AI_ASSISTANT = 4;                          // AI助手
-    SWITCHPP_CONVERSATION_RECORD = 5;                   // 轻语速记
-    SWITCHPP_AR_FACE_RECOGNITION = 6;                   // AR识人
-    SWITCHPP_IMG_MANAGER = 7;                           // 图像和相册管理
-    SWITCHPP_VOICE_SUBTITLE = 8;                        // 语音字幕
+    SWITCHPP_TRANSLATION_MASTER_SIMULTANEOUS_RESPONSE = 0;       // 同传翻译
+    SWITCHPP_TRANSLATION_MASTER_DIALOGUE_RESPONSE = 1;           // 对话翻译
+    SWITCHPP_SPEECH_INSCRIPTION_RESPONSE = 2;                    // 演讲题词
+    SWITCHPP_SOUND_RECORD_RESPONSE = 3;                          // 超能录音
+    SWITCHPP_AI_ASSISTANT_RESPONSE = 4;                          // AI助手
+    SWITCHPP_CONVERSATION_RECORD_RESPONSE = 5;                   // 轻语速记
+    SWITCHPP_AR_FACE_RECOGNITION_RESPONSE = 6;                   // AR识人
+    SWITCHPP_IMG_MANAGER_RESPONSE = 7;                           // 图像和相册管理
+    SWITCHPP_VOICE_SUBTITLE_RESPONSE = 8;                        // 语音字幕
 }
 
 //手机app启动对应模块的成功失败状态
