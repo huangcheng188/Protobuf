@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+//对应的启动模块的类型
 enum ApplicationResponseType {
     SWITCHPP_TRANSLATION_MASTER_SIMULTANEOUS = 0;       // 同传翻译
     SWITCHPP_TRANSLATION_MASTER_DIALOGUE = 1;           // 对话翻译
@@ -12,6 +13,14 @@ enum ApplicationResponseType {
     SWITCHPP_VOICE_SUBTITLE = 8;                        // 语音字幕
 }
 
+//手机app启动对应模块的成功失败状态
+message StartAppResult {
+    bool is_success_start = 1;    //app是否成功启动了模块
+    uint32 error_code = 2;       //app启动失败时候的code
+    bytes error_msg = 3;         //app启动失败时候的msg
+}
+
 message SwitchApplicationResponse {
     ApplicationResponseType response_type = 1;
+    StartAppResult start_app_result = 2;
 }
