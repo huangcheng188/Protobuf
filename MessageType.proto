@@ -26,4 +26,5 @@ enum MessageType {
     CONTROL_RESPON   = 23;      // 指令响应 获取sn值
     BLE_CONNECT_BIND   = 24;    // ble绑定回连
     PAY_ASSISTANT   = 25;       // 支付助手
+    STARTING_APPLICATION_RESPONSE = 26;  // 启动应用后的应答回传
 }
