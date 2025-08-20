@@ -24,6 +24,7 @@ import "ControlResponse.proto";
 import "DeviceStatus.proto";
 import "BleConnectBind.proto";
 import "PayAssistant.proto";
+import "GlassOta.proto";
 import "SwitchApplicationResponse.proto";
 
 message Message {
@@ -43,6 +44,7 @@ oneof Data {
     ArIdentifyResponse arIdentify = 16;
     ImgManager imgManager = 17;
     SwitchApplication switchApp = 18;
+    OtaMessage otamessage = 19;
     MessageState status = 20;
     VoiceSubtitle voiceSubtitle = 21;
     GlassesSettings glassesSettings = 22;
